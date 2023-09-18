@@ -4,7 +4,7 @@ import '../app_colors.dart';
 import '../styles.dart';
 
 
-class PetDropDownWidget<T> extends StatelessWidget {
+class DropDownWidget<T> extends StatelessWidget {
   final T? value;
   final List<T> items;
   final onChanged;
@@ -14,7 +14,7 @@ class PetDropDownWidget<T> extends StatelessWidget {
   final TextStyle? hintStyle;
   final TextStyle? valueStyle;
 
-  const PetDropDownWidget({
+  const DropDownWidget({
     Key? key,
     this.value,
     required this.items,

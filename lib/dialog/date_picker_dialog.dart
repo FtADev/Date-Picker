@@ -87,7 +87,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                     widget.showYear
                         ? SizedBox(
                             width: 100,
-                            child: PetDropDownWidget<int>(
+                            child: DropDownWidget<int>(
                               items: yearList,
                               hintText: provider.currentYear.toString(),
                               hintStyle: Styles.s16w7p,
