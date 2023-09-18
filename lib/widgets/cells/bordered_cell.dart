@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../styles.dart';
+import '../../app_colors.dart';
+import '../../styles.dart';
 
-class NormalCell extends StatelessWidget {
+
+class BorderedCell extends StatelessWidget {
   final String text;
   final double cellWidth;
   final double cellHeight;
 
-  const NormalCell({
+  const BorderedCell({
     Key? key,
     required this.text,
     required this.cellWidth,
@@ -19,8 +21,12 @@ class NormalCell extends StatelessWidget {
     return Container(
       width: cellWidth,
       height: cellHeight,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Colors.white,
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: AppColor.pinkColor,
+        ),
       ),
       child: Center(
         child: Text(

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../app_colors.dart';
-import '../styles.dart';
+import '../../app_colors.dart';
+import '../../styles.dart';
 
-class InRangeCell extends StatelessWidget {
+class FilledCell extends StatelessWidget {
   final String text;
   final double cellWidth;
   final double cellHeight;
 
-  const InRangeCell({
+  const FilledCell({
     Key? key,
     required this.text,
     required this.cellWidth,
@@ -17,18 +17,15 @@ class InRangeCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: cellWidth,
-      height: cellHeight,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 6),
-        decoration: const BoxDecoration(
-          color: AppColor.lightPinkColor,
-        ),
+    return CircleAvatar(
+      backgroundColor: AppColor.pinkColor,
+      child: SizedBox(
+        width: cellWidth,
+        height: cellHeight,
         child: Center(
           child: Text(
             text,
-            style: Styles.s14w4b,
+            style: Styles.s14w4w,
           ),
         ),
       ),

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../app_colors.dart';
-import '../styles.dart';
+import '../../styles.dart';
 
-class FilledCell extends StatelessWidget {
+class OtherMonthCell extends StatelessWidget {
   final String text;
   final double cellWidth;
   final double cellHeight;
 
-  const FilledCell({
+  const OtherMonthCell({
     Key? key,
     required this.text,
     required this.cellWidth,
@@ -17,18 +16,14 @@ class FilledCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      backgroundColor: AppColor.pinkColor,
-      child: SizedBox(
+    return SizedBox(
         width: cellWidth,
         height: cellHeight,
         child: Center(
           child: Text(
             text,
-            style: Styles.s14w4w,
+            style: Styles.s14w4g1,
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

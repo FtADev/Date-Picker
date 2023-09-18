@@ -1,18 +1,18 @@
 import 'package:custom_date_picker/extensions.dart';
-import 'package:custom_date_picker/widgets/range_head_cell.dart';
+import 'package:custom_date_picker/widgets/cells/range_head_cell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../all_providers.dart';
 import '../provider/date_provider.dart';
-import 'bordered_cell.dart';
+import 'cells/bordered_cell.dart';
 import 'calendar_header.dart';
-import 'disable_cell.dart';
-import 'filled_cell.dart';
-import 'in_range_cell.dart';
-import 'normal_cell.dart';
-import 'other_month_cell.dart';
+import 'cells/disable_cell.dart';
+import 'cells/filled_cell.dart';
+import 'cells/in_range_cell.dart';
+import 'cells/normal_cell.dart';
+import 'cells/other_month_cell.dart';
 import 'weekday_widget.dart';
 
 class MonthView extends ConsumerStatefulWidget {
