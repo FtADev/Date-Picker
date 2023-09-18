@@ -7,6 +7,7 @@ import '../../../../all_providers.dart';
 import '../provider/date_provider.dart';
 import '../styles.dart';
 import 'bordered_cell.dart';
+import 'calendar_header.dart';
 import 'disable_cell.dart';
 import 'filled_cell.dart';
 import 'normal_cell.dart';
@@ -56,30 +57,10 @@ class _SingleSelectionMonthView
     rowsNumber = ((lastDay.day + indexToSkip) / 7).ceil();
 
     return Column(children: [
-      Row(children: [
-        Text(
-          DateFormat.yMMMM().format(firstDay),
-          style: Styles.s16w7b,
-        ),
-        const Spacer(),
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: () => provider.lastMonth(),
-            child: Icon(Icons.chevron_left, size: 16,),
-          ),
-        ),
-        const SizedBox(
-          width: 20,
-        ),
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: () => provider.nextMonth(),
-            child:  Icon(Icons.chevron_right, size: 16,),
-          ),
-        ),
-      ]),
+      CalendarHeader(
+      firstDay: firstDay,
+      dateFormat: DateFormat.yMMMM(),
+    ),
       const SizedBox(
         height: 10,
       ),

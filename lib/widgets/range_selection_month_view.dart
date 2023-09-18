@@ -3,10 +3,12 @@ import 'package:custom_date_picker/widgets/range_head_cell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+
 import '../all_providers.dart';
 import '../provider/date_provider.dart';
 import '../styles.dart';
 import 'bordered_cell.dart';
+import 'calendar_header.dart';
 import 'disable_cell.dart';
 import 'in_range_cell.dart';
 import 'normal_cell.dart';
@@ -54,30 +56,10 @@ class _RangeSelectionMonthView extends ConsumerState<RangeSelectionMonthView> {
     rowsNumber = ((lastDay.day + indexToSkip) / 7).ceil();
 
     return Column(children: [
-      Row(children: [
-        Text(
-          DateFormat.yMMMM().format(firstDay),
-          style: Styles.s16w7b,
-        ),
-        const Spacer(),
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: () => provider.lastMonth(),
-            child: Icon(Icons.chevron_left, size: 16,),
-          ),
-        ),
-        const SizedBox(
-          width: 20,
-        ),
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: () => provider.nextMonth(),
-            child:  Icon(Icons.chevron_right, size: 16,),
-          ),
-        ),
-      ]),
+      CalendarHeader(
+        firstDay: firstDay,
+        dateFormat: DateFormat.yMMMM(),
+      ),
       const SizedBox(
         height: 10,
       ),
@@ -134,9 +116,10 @@ class _RangeSelectionMonthView extends ConsumerState<RangeSelectionMonthView> {
     ]);
   }
 
-  Widget generateCell(
-      {required DateTime currentDay,
-      required DateTime firstDay,}) {
+  Widget generateCell({
+    required DateTime currentDay,
+    required DateTime firstDay,
+  }) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 
     Widget cell;
@@ -184,7 +167,8 @@ class _RangeSelectionMonthView extends ConsumerState<RangeSelectionMonthView> {
         cellWidth: cellWidth,
         cellHeight: cellHeight,
         headPosition: HeadPosition.start,
-        showTail: provider.selectedDay1 != null && provider.selectedDay2 != null,
+        showTail:
+            provider.selectedDay1 != null && provider.selectedDay2 != null,
       );
     } else if (provider.selectedDay2 != null &&
         provider.selectedDay2!.compareWithoutTime(currentDay)) {
@@ -193,7 +177,8 @@ class _RangeSelectionMonthView extends ConsumerState<RangeSelectionMonthView> {
         cellWidth: cellWidth,
         cellHeight: cellHeight,
         headPosition: HeadPosition.end,
-        showTail: provider.selectedDay1 != null && provider.selectedDay2 != null,
+        showTail:
+            provider.selectedDay1 != null && provider.selectedDay2 != null,
       );
     } else {
       cell = InRangeCell(
@@ -215,5 +200,4 @@ class _RangeSelectionMonthView extends ConsumerState<RangeSelectionMonthView> {
       provider.selectedDay1 = currentDay;
     }
   }
-
 }
