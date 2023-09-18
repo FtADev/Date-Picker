@@ -45,10 +45,7 @@ class PetDropDownWidget<T> extends StatelessWidget {
         style: hintStyle ?? Styles.s18w7b,
       ),
       value: value,
-      icon: Image.asset(
-        "assets/icons/arrow-bottom.png",
-        height: 10,
-      ),
+      icon: Icon(Icons.arrow_drop_down_outlined, size: 16,),
       isExpanded: true,
       // itemHeight: 48,
       // iconSize: 16,

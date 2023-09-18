@@ -59,7 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (_) => MyDatePickerDialog(
               initialDate: DateTime.now(),
               showRange: true,
-              showTime: true,
+              showTime: false,
+              showYear: true,
               onSubmitTap: (_) {
                 Navigator.of(context).pop();
               },
