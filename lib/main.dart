@@ -67,18 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ));
   }
 
-  void _showSinglePicker() {
-    showDialog(
-        context: context,
-        builder: (_) => MyDatePickerDialog(
-          initialDate: DateTime.now(),
-          showRange: false,
-          showTime: true,
-          onSubmitTap: (_) {
-            Navigator.of(context).pop();
-          },
-        ));
-  }
 
   @override
   Widget build(BuildContext context) {

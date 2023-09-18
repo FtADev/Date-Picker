@@ -8,9 +8,8 @@ import '../app_colors.dart';
 import '../functions.dart';
 import '../provider/date_provider.dart';
 import '../styles.dart';
-import '../widgets/range_selection_month_view.dart';
+import '../widgets/month_view.dart';
 import '../widgets/rounded_button.dart';
-import '../widgets/single_selection_month_view.dart';
 
 class MyDatePickerDialog extends ConsumerStatefulWidget {
   final DateTime initialDate;
@@ -110,13 +109,10 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                 SizedBox(
                   height: 10,
                 ),
-                widget.showRange
-                    ? RangeSelectionMonthView(
-                        disableDates: widget.disableDates,
-                      )
-                    : SingleSelectionMonthView(
-                        disableDates: widget.disableDates,
-                      ),
+                MonthView(
+                  disableDates: widget.disableDates,
+                  isRangeSelection: widget.showRange,
+                ),
                 widget.showTime
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

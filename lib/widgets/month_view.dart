@@ -6,29 +6,31 @@ import 'package:intl/intl.dart';
 
 import '../all_providers.dart';
 import '../provider/date_provider.dart';
-import '../styles.dart';
 import 'bordered_cell.dart';
 import 'calendar_header.dart';
 import 'disable_cell.dart';
+import 'filled_cell.dart';
 import 'in_range_cell.dart';
 import 'normal_cell.dart';
 import 'other_month_cell.dart';
 import 'weekday_widget.dart';
 
-class RangeSelectionMonthView extends ConsumerStatefulWidget {
+class MonthView extends ConsumerStatefulWidget {
   final List<DateTime>? disableDates;
+  final bool isRangeSelection;
 
-  const RangeSelectionMonthView({
+  const MonthView({
+    required this.isRangeSelection,
     super.key,
     this.disableDates,
   });
 
   @override
-  ConsumerState<RangeSelectionMonthView> createState() =>
+  ConsumerState<MonthView> createState() =>
       _RangeSelectionMonthView();
 }
 
-class _RangeSelectionMonthView extends ConsumerState<RangeSelectionMonthView> {
+class _RangeSelectionMonthView extends ConsumerState<MonthView> {
   List<String> weekDayNames = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
   // rowsNumber is the number of weeks in each month,
@@ -71,14 +73,14 @@ class _RangeSelectionMonthView extends ConsumerState<RangeSelectionMonthView> {
           children: [
             TableRow(children: [
               ...List.generate(
-                  // Week Days names
-                  7,
-                  (index) => WeekdayWidget(
-                    cellHeight: cellHeight,
-                    cellWidth: cellWidth,
-                    weekday: weekDayNames[index],
-                  ),
-        ),
+                // Week Days names
+                7,
+                (index) => WeekdayWidget(
+                  cellHeight: cellHeight,
+                  cellWidth: cellWidth,
+                  weekday: weekDayNames[index],
+                ),
+              ),
             ]),
             ...List.generate(
               rowsNumber,
@@ -98,10 +100,19 @@ class _RangeSelectionMonthView extends ConsumerState<RangeSelectionMonthView> {
                         cellHeight: cellHeight,
                       );
                     } else {
-                      return generateCell(
-                        currentDay: currentDay,
-                        firstDay: firstDay,
-                      );
+                      return widget.isRangeSelection
+                          ? generateRangeCell(
+                              currentDay: currentDay,
+                              firstDay: firstDay,
+                              isNotPreviousMonth:
+                                  ((rowIndex * 7) + colIndex) >= indexToSkip,
+                            )
+                          : generateSingleCell(
+                              currentDay: currentDay,
+                              firstDay: firstDay,
+                              isNotPreviousMonth:
+                                  ((rowIndex * 7) + colIndex) >= indexToSkip,
+                            );
                     }
                   },
                 ),
@@ -113,18 +124,78 @@ class _RangeSelectionMonthView extends ConsumerState<RangeSelectionMonthView> {
     ]);
   }
 
-  Widget generateCell({
-    required DateTime currentDay,
-    required DateTime firstDay,
-  }) {
+  Widget generateSingleCell(
+      {required DateTime currentDay,
+      required DateTime firstDay,
+      required bool isNotPreviousMonth}) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 
     Widget cell;
+    int whichMonth = 0; //in this month
+
+    if (currentDay.isInMonth(firstDay)) {
+      whichMonth = 0;
+
+      cell = provider.currentDay.compareWithoutTime(currentDay)
+          ? FilledCell(
+              cellWidth: cellWidth,
+              cellHeight: cellHeight,
+              text: currentDay.day.toString(),
+            )
+          : currentDay.isToday()
+              ? BorderedCell(
+                  cellWidth: cellWidth,
+                  cellHeight: cellHeight,
+                  text: currentDay.day.toString(),
+                )
+              : NormalCell(
+                  cellWidth: cellWidth,
+                  cellHeight: cellHeight,
+                  text: currentDay.day.toString(),
+                );
+    } else {
+      whichMonth = isNotPreviousMonth ? 1 : -1;
+      cell = OtherMonthCell(
+        cellWidth: cellWidth,
+        cellHeight: cellHeight,
+        text: currentDay.day.toString(),
+      );
+    }
+
+    return GestureDetector(
+        onTap: () => onSingleDaysTap(
+              currentDay: currentDay,
+              whichMonth: whichMonth,
+            ),
+        child: cell);
+  }
+
+  void onSingleDaysTap({
+    required DateTime currentDay,
+    required int whichMonth,
+    DateTime? selectedDay,
+  }) {
+    DateProvider provider = ref.watch(AllProvider.dateProvider);
+
+    switchMonth(provider, whichMonth);
+
+    provider.currentDay = currentDay;
+  }
+
+  Widget generateRangeCell(
+      {required DateTime currentDay,
+      required DateTime firstDay,
+      required bool isNotPreviousMonth}) {
+    DateProvider provider = ref.watch(AllProvider.dateProvider);
+
+    Widget cell;
+    int whichMonth = 0; //in this month
 
     if (provider.rangeList.contains(currentDay)) {
-      cell = rangeCells(currentDay);
+      cell = _rangeCells(currentDay);
     } else {
       if (currentDay.isInMonth(firstDay)) {
+        whichMonth = 0;
         if (currentDay.isToday()) {
           cell = BorderedCell(
             text: currentDay.day.toString(),
@@ -141,6 +212,7 @@ class _RangeSelectionMonthView extends ConsumerState<RangeSelectionMonthView> {
         }
       } else {
         // other month
+        whichMonth = isNotPreviousMonth ? 1 : -1;
         cell = OtherMonthCell(
           text: currentDay.day.toString(),
           cellWidth: cellWidth,
@@ -149,10 +221,14 @@ class _RangeSelectionMonthView extends ConsumerState<RangeSelectionMonthView> {
       }
     }
     return GestureDetector(
-        onTap: () => onDaysTap(currentDay: currentDay), child: cell);
+        onTap: () => onRangeDaysTap(
+              currentDay: currentDay,
+              whichMonth: whichMonth,
+            ),
+        child: cell);
   }
 
-  Widget rangeCells(DateTime currentDay) {
+  Widget _rangeCells(DateTime currentDay) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 
     Widget cell;
@@ -188,13 +264,32 @@ class _RangeSelectionMonthView extends ConsumerState<RangeSelectionMonthView> {
     return cell;
   }
 
-  onDaysTap({required DateTime currentDay, DateTime? selectedDay}) {
+  void onRangeDaysTap({
+    required DateTime currentDay,
+    required int whichMonth,
+    DateTime? selectedDay,
+  }) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
+
+    switchMonth(provider, whichMonth);
 
     if (provider.selectedDay1 != null && provider.selectedDay2 == null) {
       provider.selectedDay2 = currentDay;
     } else {
       provider.selectedDay1 = currentDay;
+    }
+  }
+
+  switchMonth(DateProvider provider, int whichMonth) {
+    switch (whichMonth) {
+      case -1:
+        provider.lastMonth();
+        break;
+      case 1:
+        provider.nextMonth();
+        break;
+      default:
+        break;
     }
   }
 }
