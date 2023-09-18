@@ -13,6 +13,7 @@ import 'disable_cell.dart';
 import 'in_range_cell.dart';
 import 'normal_cell.dart';
 import 'other_month_cell.dart';
+import 'weekday_widget.dart';
 
 class RangeSelectionMonthView extends ConsumerStatefulWidget {
   final List<DateTime>? disableDates;
@@ -72,16 +73,12 @@ class _RangeSelectionMonthView extends ConsumerState<RangeSelectionMonthView> {
               ...List.generate(
                   // Week Days names
                   7,
-                  (index) => SizedBox(
-                        // padding: const EdgeInsets.all(10),
-                        width: cellWidth,
-                        height: cellHeight,
-                        child: Center(
-                            child: Text(
-                          weekDayNames[index],
-                          style: Styles.s14w7g1,
-                        )),
-                      ))
+                  (index) => WeekdayWidget(
+                    cellHeight: cellHeight,
+                    cellWidth: cellWidth,
+                    weekday: weekDayNames[index],
+                  ),
+        ),
             ]),
             ...List.generate(
               rowsNumber,

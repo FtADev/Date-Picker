@@ -5,13 +5,13 @@ import 'package:intl/intl.dart';
 
 import '../../../../all_providers.dart';
 import '../provider/date_provider.dart';
-import '../styles.dart';
 import 'bordered_cell.dart';
 import 'calendar_header.dart';
 import 'disable_cell.dart';
 import 'filled_cell.dart';
 import 'normal_cell.dart';
 import 'other_month_cell.dart';
+import 'weekday_widget.dart';
 
 class SingleSelectionMonthView extends ConsumerStatefulWidget {
   final List<DateTime>? disableDates;
@@ -58,9 +58,9 @@ class _SingleSelectionMonthView
 
     return Column(children: [
       CalendarHeader(
-      firstDay: firstDay,
-      dateFormat: DateFormat.yMMMM(),
-    ),
+        firstDay: firstDay,
+        dateFormat: DateFormat.yMMMM(),
+      ),
       const SizedBox(
         height: 10,
       ),
@@ -71,18 +71,14 @@ class _SingleSelectionMonthView
           children: [
             TableRow(children: [
               ...List.generate(
-                  // Week Days names
-                  7,
-                  (index) => SizedBox(
-                        // padding: const EdgeInsets.all(10),
-                        width: cellWidth,
-                        height: cellHeight,
-                        child: Center(
-                            child: Text(
-                          weekDayNames[index],
-                          style: Styles.s14w7g1,
-                        )),
-                      ))
+                // Week Days names
+                7,
+                (index) => WeekdayWidget(
+                  cellHeight: cellHeight,
+                  cellWidth: cellWidth,
+                  weekday: weekDayNames[index],
+                ),
+              )
             ]),
             ...List.generate(
               rowsNumber,
