@@ -1,4 +1,6 @@
-import 'package:custom_date_picker/extensions.dart';
+import 'package:custom_date_picker/core/base_datetime.dart';
+import 'package:custom_date_picker/core/extensions.dart';
+import 'package:custom_date_picker/core/other_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,16 +26,18 @@ class UIPart extends ConsumerStatefulWidget {
       required this.disableDates,
       required this.firstDay,
       required this.indexToSkip,
+      required this.calMode,
+
       Key? key})
       : super(key: key);
   final int rowsNumber;
   final String monthName;
   final List<String> weekdays;
   final List<DateTime>? disableDates;
-  final DateTime firstDay;
+  final BaseDateTime firstDay;
   final int indexToSkip;
   final bool isRangeSelection;
-
+  final String calMode;
 
   @override
   ConsumerState<UIPart> createState() => _UIPartState();
@@ -83,8 +87,8 @@ class _UIPartState extends ConsumerState<UIPart> {
                 ...List.generate(
                   7,
                   (colIndex) {
-                    DateTime currentDay = widget.firstDay.add(Duration(
-                        days: ((rowIndex * 7) + colIndex) - widget.indexToSkip));
+                    BaseDateTime currentDay = OtherFunctions.convertToBaseDate(widget.calMode, widget.firstDay.add(Duration(
+                        days: ((rowIndex * 7) + colIndex) - widget.indexToSkip)));
 
                     if (widget.disableDates != null &&
                         currentDay.isInList(widget.disableDates!)) {
@@ -120,8 +124,8 @@ class _UIPartState extends ConsumerState<UIPart> {
   }
 
   Widget generateSingleCell(
-      {required DateTime currentDay,
-      required DateTime firstDay,
+      {required BaseDateTime currentDay,
+      required BaseDateTime firstDay,
       required bool isNotPreviousMonth}) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 
@@ -166,9 +170,9 @@ class _UIPartState extends ConsumerState<UIPart> {
   }
 
   void onSingleDaysTap({
-    required DateTime currentDay,
+    required BaseDateTime currentDay,
     required int whichMonth,
-    DateTime? selectedDay,
+    BaseDateTime? selectedDay,
   }) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 
@@ -178,8 +182,8 @@ class _UIPartState extends ConsumerState<UIPart> {
   }
 
   Widget generateRangeCell(
-      {required DateTime currentDay,
-      required DateTime firstDay,
+      {required BaseDateTime currentDay,
+      required BaseDateTime firstDay,
       required bool isNotPreviousMonth}) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 
@@ -223,7 +227,7 @@ class _UIPartState extends ConsumerState<UIPart> {
         child: cell);
   }
 
-  Widget _rangeCells(DateTime currentDay) {
+  Widget _rangeCells(BaseDateTime currentDay) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 
     Widget cell;
@@ -260,9 +264,9 @@ class _UIPartState extends ConsumerState<UIPart> {
   }
 
   void onRangeDaysTap({
-    required DateTime currentDay,
+    required BaseDateTime currentDay,
     required int whichMonth,
-    DateTime? selectedDay,
+    BaseDateTime? selectedDay,
   }) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 

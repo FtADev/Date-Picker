@@ -1,7 +1,12 @@
+import 'package:custom_date_picker/core/base_datetime.dart';
+import 'package:custom_date_picker/core/gregorian_datetime.dart';
+import 'package:custom_date_picker/core/other_functions.dart';
+import 'package:custom_date_picker/core/persian_datetime.dart';
 import 'package:custom_date_picker/widgets/ui_part.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 
 import '../all_providers.dart';
 import '../provider/date_provider.dart';
@@ -9,8 +14,10 @@ import '../provider/date_provider.dart';
 class MonthView extends ConsumerStatefulWidget {
   final List<DateTime>? disableDates;
   final bool isRangeSelection;
+  final String calMode;
 
   const MonthView({
+    required this.calMode,
     required this.isRangeSelection,
     super.key,
     this.disableDates,
@@ -40,10 +47,12 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
   @override
   Widget build(BuildContext context) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
-    DateTime firstDay =
-        DateTime.utc(provider.currentYear, provider.currentMonth, 1);
-    DateTime lastDay =
-        DateTime.utc(provider.currentYear, provider.currentMonth + 1, 0);
+
+    BaseDateTime firstDay = OtherFunctions.convertToBaseDate(widget.calMode,
+        DateTime.utc(provider.currentYear, provider.currentMonth, 1));
+
+    BaseDateTime lastDay = OtherFunctions.convertToBaseDate(widget.calMode,
+        DateTime.utc(provider.currentYear, provider.currentMonth + 1, 0));
 
     indexToSkip = firstDay.weekday - 1;
     rowsNumber = ((lastDay.day + indexToSkip) / 7).ceil();
@@ -54,9 +63,10 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
     // }
 
     return UIPart(
+      calMode: widget.calMode,
       firstDay: firstDay,
       indexToSkip: indexToSkip,
-      monthName: DateFormat.yMMMM().format(firstDay),
+      monthName: firstDay.getMonthName(firstDay.month),
       rowsNumber: rowsNumber,
       weekdays: weekDayNames,
       disableDates: widget.disableDates,

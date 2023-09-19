@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 
 import 'dialog/date_picker_dialog.dart';
 
@@ -61,15 +62,22 @@ class _MyHomePageState extends State<MyHomePage> {
               showRange: false,
               showTime: false,
               showYear: true,
+              calMode: "g",
               onSubmitTap: (_) {
                 Navigator.of(context).pop();
               },
             ));
   }
 
-
   @override
   Widget build(BuildContext context) {
+    Jalali j = Jalali.fromDateTime(DateTime.now());
+    int year = j.year;
+    int month = j.month;
+    int day = j.day;
+    print(year);
+    print(month);
+    print(day);
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //

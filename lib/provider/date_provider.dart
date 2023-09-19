@@ -1,23 +1,37 @@
+import 'package:custom_date_picker/core/base_datetime.dart';
+import 'package:custom_date_picker/core/other_functions.dart';
 import 'package:flutter/material.dart';
 
 class DateProvider extends ChangeNotifier {
-  DateTime _currentDay = DateTime(DateTime.now().year, DateTime.now().month,
-      DateTime.now().day, DateTime.now().hour, DateTime.now().minute, 0);
+  String _calMode = "g";
 
-  DateTime get currentDay => _currentDay;
+  String get calMode => _calMode;
 
-  set currentDay(DateTime value) {
+  set calMode(String value) {
+    if (value != _calMode) {
+      _calMode = value;
+      debugPrint("CalMode change to $_calMode");
+      notifyListeners();
+    }
+  }
+
+  BaseDateTime _currentDay = BaseDateTime.now();
+
+
+  BaseDateTime get currentDay => _currentDay;
+
+  set currentDay(BaseDateTime value) {
     if (value != _currentDay) {
       _currentDay = value;
       notifyListeners();
     }
   }
 
-  DateTime? _selectedDay1;
+  BaseDateTime? _selectedDay1;
 
-  DateTime? get selectedDay1 => _selectedDay1;
+  BaseDateTime? get selectedDay1 => _selectedDay1;
 
-  set selectedDay1(DateTime? value) {
+  set selectedDay1(BaseDateTime? value) {
     debugPrint("1: $value");
 
     if (value != null) {
@@ -37,11 +51,11 @@ class DateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  DateTime? _selectedDay2;
+  BaseDateTime? _selectedDay2;
 
-  DateTime? get selectedDay2 => _selectedDay2;
+  BaseDateTime? get selectedDay2 => _selectedDay2;
 
-  set selectedDay2(DateTime? value) {
+  set selectedDay2(BaseDateTime? value) {
     debugPrint("2: $value");
 
     if (value != null) {
@@ -59,17 +73,17 @@ class DateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void swapDays(DateTime value) {
+  void swapDays(BaseDateTime value) {
     final swapVar = selectedDay1;
     selectedDay1 = value;
     selectedDay2 = swapVar;
   }
 
-  List<DateTime> _rangeList = [];
+  List<BaseDateTime> _rangeList = [];
 
-  List<DateTime> get rangeList => _rangeList;
+  List<BaseDateTime> get rangeList => _rangeList;
 
-  set rangeList(List<DateTime> value) {
+  set rangeList(List<BaseDateTime> value) {
     if (value != _rangeList) {
       debugPrint("2: $value");
       _rangeList = value;
@@ -77,7 +91,7 @@ class DateProvider extends ChangeNotifier {
     }
   }
 
-  void addToDateRange(DateTime date) {
+  void addToDateRange(BaseDateTime date) {
     rangeList.add(date);
     notifyListeners();
   }
@@ -87,9 +101,9 @@ class DateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addAllDaysTill(DateTime date) {
+  void addAllDaysTill(BaseDateTime date) {
     for (int i = 1; i <= selectedDay2!.difference(selectedDay1!).inDays; i++) {
-      rangeList.add(selectedDay1!.add(Duration(days: i)));
+      rangeList.add(OtherFunctions.convertToBaseDate(calMode, selectedDay1!.add(Duration(days: i))));
     }
     notifyListeners();
   }
@@ -112,7 +126,7 @@ class DateProvider extends ChangeNotifier {
   set currentYear(int value) {
     if (value != _currentYear) {
       _currentYear = value;
-      currentDay = DateTime(currentYear, currentMonth, currentDay.day);
+      currentDay = BaseDateTime(currentYear, currentMonth, currentDay.day);
       currentMonth = currentDay.month;
       notifyListeners();
     }

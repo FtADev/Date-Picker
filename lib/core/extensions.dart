@@ -10,13 +10,13 @@ extension DateTimeExtensions on DateTime {
     return day == date.day && month == date.month && year == date.year;
   }
 
-  bool isInMonth(DateTime date) {
-    return month == date.month;
-  }
-
-  bool isToday() {
-    return year == now.year && month == now.month && day == now.day;
-  }
+  // bool isInMonth(DateTime date) {
+  //   return month == date.month;
+  // }
+  //
+  // bool isToday() {
+  //   return year == now.year && month == now.month && day == now.day;
+  // }
 
   int differenceDays(DateTime date) {
     return (day - date.day).abs();
@@ -52,7 +52,7 @@ extension DateTimeExtensions on DateTime {
       case 12:
         return "December";
     }
-    return "January";
+    return "";
   }
 
   String getWeekDayName() {

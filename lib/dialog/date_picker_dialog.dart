@@ -1,3 +1,4 @@
+import 'package:custom_date_picker/core/other_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +19,8 @@ class MyDatePickerDialog extends ConsumerStatefulWidget {
   final bool showTime;
   final bool showYear;
   final bool showRange;
+  final String calMode;
+
 
   const MyDatePickerDialog({
     this.disableDates,
@@ -27,6 +30,7 @@ class MyDatePickerDialog extends ConsumerStatefulWidget {
     this.showTime = true,
     this.showYear = false,
     this.showRange = false,
+    this.calMode = "g",
   }) : super(key: key);
 
   @override
@@ -53,7 +57,8 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
     selectedTime2 = TimeOfDay(
         hour: widget.initialDate.hour, minute: widget.initialDate.minute);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      ref.watch(AllProvider.dateProvider).currentDay = widget.initialDate;
+      ref.watch(AllProvider.dateProvider).calMode = widget.calMode;
+      ref.watch(AllProvider.dateProvider).currentDay = OtherFunctions.convertToBaseDate(widget.calMode, widget.initialDate);
       ref.watch(AllProvider.dateProvider).currentYear = yearList.first;
     });
     super.initState();
@@ -110,6 +115,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                   height: 10,
                 ),
                 MonthView(
+                  calMode: widget.calMode,
                   disableDates: widget.disableDates,
                   isRangeSelection: widget.showRange,
                 ),
