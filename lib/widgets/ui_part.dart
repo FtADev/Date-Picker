@@ -1,6 +1,5 @@
 import 'package:custom_date_picker/core/base_datetime.dart';
 import 'package:custom_date_picker/core/extensions.dart';
-import 'package:custom_date_picker/core/other_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,8 +17,8 @@ import 'cells/range_head_cell.dart';
 import 'weekday_widget.dart';
 
 class UIPart extends ConsumerStatefulWidget {
-  const UIPart({
-      required this.isRangeSelection,
+  const UIPart(
+      {required this.isRangeSelection,
       required this.rowsNumber,
       required this.monthName,
       required this.weekdays,
@@ -27,7 +26,6 @@ class UIPart extends ConsumerStatefulWidget {
       required this.firstDay,
       required this.indexToSkip,
       required this.calMode,
-
       Key? key})
       : super(key: key);
   final int rowsNumber;
@@ -87,8 +85,8 @@ class _UIPartState extends ConsumerState<UIPart> {
                 ...List.generate(
                   7,
                   (colIndex) {
-                    BaseDateTime currentDay = widget.firstDay.addDuration(((rowIndex * 7) + colIndex) - widget.indexToSkip);
-
+                    BaseDateTime currentDay = widget.firstDay.addDuration(
+                        ((rowIndex * 7) + colIndex) - widget.indexToSkip);
                     if (widget.disableDates != null &&
                         currentDay.isInList(widget.disableDates!)) {
                       // for disable days
@@ -102,14 +100,14 @@ class _UIPartState extends ConsumerState<UIPart> {
                           ? generateRangeCell(
                               currentDay: currentDay,
                               firstDay: widget.firstDay,
-                              isNotPreviousMonth:
-                                  ((rowIndex * 7) + colIndex) >= widget.indexToSkip,
+                              isNotPreviousMonth: ((rowIndex * 7) + colIndex) >=
+                                  widget.indexToSkip,
                             )
                           : generateSingleCell(
                               currentDay: currentDay,
                               firstDay: widget.firstDay,
-                              isNotPreviousMonth:
-                                  ((rowIndex * 7) + colIndex) >= widget.indexToSkip,
+                              isNotPreviousMonth: ((rowIndex * 7) + colIndex) >=
+                                  widget.indexToSkip,
                             );
                     }
                   },

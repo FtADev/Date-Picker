@@ -45,12 +45,11 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
 
     BaseDateTime firstDay = provider.currentDay.getFirstDayOfMonth();
 
-    print(firstDay);
     BaseDateTime lastDay = provider.currentDay.getLastDayOfMonth();
-    print(lastDay);
 
     indexToSkip = firstDay.weekday - 1;
-    rowsNumber = ((lastDay.day + indexToSkip) / 7).ceil();
+
+    rowsNumber = ((lastDay.getDayNumber() + indexToSkip) / 7).ceil();
 
     // print(firstDay);
     // for(int i=1;i<8;i++) {

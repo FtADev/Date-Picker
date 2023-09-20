@@ -34,7 +34,7 @@ class BaseDateTime extends DateTime {
 
   bool compareWithoutTime(BaseDateTime date) => day == date.day && month == date.month && year == date.year;
 
-  int getDayNumber(BaseDateTime date) => day;
+  int getDayNumber() => day;
 
   String getDay() => day.toString();
 

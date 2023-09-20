@@ -34,6 +34,9 @@ class PersianDateTime extends BaseDateTime {
       Jalali.fromDateTime(DateTime(year, month, day)).day.toString());
 
   @override
+  int getDayNumber() => Jalali.fromDateTime(DateTime(year, month, day)).day;
+
+  @override
   int getMonth() => Jalali.fromDateTime(DateTime(year, month, day)).month;
 
   @override
