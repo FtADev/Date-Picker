@@ -61,7 +61,7 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
       calMode: widget.calMode,
       firstDay: firstDay,
       indexToSkip: indexToSkip,
-      monthName: firstDay.getMonthName(firstDay.month),
+      monthName: firstDay.getMonthName(provider.currentMonth),
       rowsNumber: rowsNumber,
       weekdays: weekDayNames,
       disableDates: widget.disableDates,

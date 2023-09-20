@@ -17,7 +17,6 @@ class DateProvider extends ChangeNotifier {
 
   BaseDateTime _currentDay = BaseDateTime.now();
 
-
   BaseDateTime get currentDay => _currentDay;
 
   set currentDay(BaseDateTime value) {
@@ -103,12 +102,13 @@ class DateProvider extends ChangeNotifier {
 
   void addAllDaysTill(BaseDateTime date) {
     for (int i = 1; i <= selectedDay2!.difference(selectedDay1!).inDays; i++) {
-      rangeList.add(OtherFunctions.convertToBaseDate(calMode, selectedDay1!.add(Duration(days: i))));
+      rangeList.add(OtherFunctions.convertToBaseDate(
+          calMode, selectedDay1!.add(Duration(days: i))));
     }
     notifyListeners();
   }
 
-  int _currentMonth = DateTime.now().month;
+  int _currentMonth = BaseDateTime.now().month;
 
   int get currentMonth => _currentMonth;
 
@@ -119,14 +119,15 @@ class DateProvider extends ChangeNotifier {
     }
   }
 
-  int _currentYear = DateTime.now().year;
+  int _currentYear = BaseDateTime.now().year;
 
   int get currentYear => _currentYear;
 
   set currentYear(int value) {
     if (value != _currentYear) {
       _currentYear = value;
-      currentDay = BaseDateTime(currentYear, currentMonth, currentDay.day);
+      currentDay = OtherFunctions.convertToBaseDate(
+          calMode, DateTime(currentYear, currentMonth, currentDay.day));
       currentMonth = currentDay.month;
       notifyListeners();
     }
