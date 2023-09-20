@@ -10,13 +10,13 @@ class OtherFunctions {
       case "g":
         return GregorianDateTime(date.year, date.month, date.day);
       case "p":
-        return _convertToPersian(date);
+        return convertToPersian(date);
       default:
         return BaseDateTime(date.year, date.month, date.day);
     }
   }
 
-  static BaseDateTime _convertToPersian(DateTime date) {
+  static BaseDateTime convertToPersian(DateTime date) {
     Jalali j = Jalali.fromDateTime(date);
     int year = j.year;
     int month = j.month;

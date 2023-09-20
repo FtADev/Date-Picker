@@ -1,15 +1,45 @@
 import 'package:custom_date_picker/core/base_datetime.dart';
+import 'package:custom_date_picker/core/other_functions.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 
 class PersianDateTime extends BaseDateTime {
   PersianDateTime(super.year, super.month, super.day);
+
   PersianDateTime.now() : super.now();
 
   @override
-  bool isInMonth(DateTime date) => false;
+  bool isInMonth(BaseDateTime date) {
+    Jalali first = Jalali.fromDateTime(DateTime(year, month, day));
+    Jalali second = Jalali.fromDateTime(date);
+    return first.month == second.month;
+  }
 
   @override
-  bool isToday() => false;
+  bool compareWithoutTime(DateTime date) {
+    Jalali first = Jalali.fromDateTime(DateTime(year, month, day));
+    Jalali second = Jalali.fromDateTime(date);
+    return first.day == second.day &&
+        first.month == second.month &&
+        first.year == second.year;
+  }
 
+  @override
+  bool isToday() {
+    Jalali first = Jalali.fromDateTime(DateTime.now());
+
+    return first.year == PersianDateTime.now().year &&
+        first.month == PersianDateTime.now().month &&
+        first.day == PersianDateTime.now().day;
+  }
+
+  @override
+  String getDay() => OtherFunctions.convertToPersianNumber(Jalali.fromDateTime(DateTime(year, month, day)).day.toString());
+
+  @override
+  int getMonth() => Jalali.fromDateTime(DateTime(year, month, day)).month;
+
+  @override
+  int getYear() => Jalali.fromDateTime(DateTime(year, month, day)).year;
 
   @override
   String getMonthName(int index) {
@@ -61,5 +91,12 @@ class PersianDateTime extends BaseDateTime {
         return "جمعه";
     }
     return "";
+  }
+
+  @override
+  String toString() {
+    String output = "${getYear()} ${getMonthName(getMonth())} ${getDay()}";
+    output = OtherFunctions.convertToPersianNumber(output);
+    return output;
   }
 }

@@ -94,7 +94,7 @@ class _UIPartState extends ConsumerState<UIPart> {
                         currentDay.isInList(widget.disableDates!)) {
                       // for disable days
                       return DisableCell(
-                        text: currentDay.day.toString(),
+                        text: currentDay.getDay(),
                         cellWidth: cellWidth,
                         cellHeight: cellHeight,
                       );
@@ -139,25 +139,25 @@ class _UIPartState extends ConsumerState<UIPart> {
           ? FilledCell(
               cellWidth: cellWidth,
               cellHeight: cellHeight,
-              text: currentDay.day.toString(),
+              text: currentDay.getDay(),
             )
           : currentDay.isToday()
               ? BorderedCell(
                   cellWidth: cellWidth,
                   cellHeight: cellHeight,
-                  text: currentDay.day.toString(),
+                  text: currentDay.getDay(),
                 )
               : NormalCell(
                   cellWidth: cellWidth,
                   cellHeight: cellHeight,
-                  text: currentDay.day.toString(),
+                  text: currentDay.getDay(),
                 );
     } else {
       whichMonth = isNotPreviousMonth ? 1 : -1;
       cell = OtherMonthCell(
         cellWidth: cellWidth,
         cellHeight: cellHeight,
-        text: currentDay.day.toString(),
+        text: currentDay.getDay(),
       );
     }
 
@@ -197,14 +197,14 @@ class _UIPartState extends ConsumerState<UIPart> {
         whichMonth = 0;
         if (currentDay.isToday()) {
           cell = BorderedCell(
-            text: currentDay.day.toString(),
+            text: currentDay.getDay(),
             cellWidth: cellWidth,
             cellHeight: cellHeight,
           );
         } else {
           // normal
           cell = NormalCell(
-            text: currentDay.day.toString(),
+            text: currentDay.getDay(),
             cellWidth: cellWidth,
             cellHeight: cellHeight,
           );
@@ -213,7 +213,7 @@ class _UIPartState extends ConsumerState<UIPart> {
         // other month
         whichMonth = isNotPreviousMonth ? 1 : -1;
         cell = OtherMonthCell(
-          text: currentDay.day.toString(),
+          text: currentDay.getDay(),
           cellWidth: cellWidth,
           cellHeight: cellHeight,
         );
@@ -235,7 +235,7 @@ class _UIPartState extends ConsumerState<UIPart> {
     if (provider.selectedDay1 != null &&
         provider.selectedDay1!.compareWithoutTime(currentDay)) {
       cell = RangeHeadCell(
-        text: currentDay.day.toString(),
+        text: currentDay.getDay(),
         cellWidth: cellWidth,
         cellHeight: cellHeight,
         headPosition: HeadPosition.start,
@@ -245,7 +245,7 @@ class _UIPartState extends ConsumerState<UIPart> {
     } else if (provider.selectedDay2 != null &&
         provider.selectedDay2!.compareWithoutTime(currentDay)) {
       cell = RangeHeadCell(
-        text: currentDay.day.toString(),
+        text: currentDay.getDay(),
         cellWidth: cellWidth,
         cellHeight: cellHeight,
         headPosition: HeadPosition.end,
@@ -254,7 +254,7 @@ class _UIPartState extends ConsumerState<UIPart> {
       );
     } else {
       cell = InRangeCell(
-        text: currentDay.day.toString(),
+        text: currentDay.getDay(),
         cellWidth: cellWidth,
         cellHeight: cellHeight,
       );

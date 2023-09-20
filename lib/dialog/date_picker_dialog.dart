@@ -21,7 +21,6 @@ class MyDatePickerDialog extends ConsumerStatefulWidget {
   final bool showRange;
   final String calMode;
 
-
   const MyDatePickerDialog({
     this.disableDates,
     required this.initialDate,
@@ -58,7 +57,8 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
         hour: widget.initialDate.hour, minute: widget.initialDate.minute);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       ref.watch(AllProvider.dateProvider).calMode = widget.calMode;
-      ref.watch(AllProvider.dateProvider).currentDay = OtherFunctions.convertToBaseDate(widget.calMode, widget.initialDate);
+      ref.watch(AllProvider.dateProvider).currentDay =
+          OtherFunctions.convertToBaseDate(widget.calMode, widget.initialDate);
       ref.watch(AllProvider.dateProvider).currentYear = yearList.first;
     });
     super.initState();
@@ -204,7 +204,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
   Widget normalDate() {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 
-    return Text(DateFormat.yMMMMd().format(provider.currentDay),
+    return Text(provider.currentDay.toString(),
         style: Styles.s16w7p);
   }
 

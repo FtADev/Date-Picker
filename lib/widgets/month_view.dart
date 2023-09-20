@@ -48,11 +48,9 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
   Widget build(BuildContext context) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 
-    BaseDateTime firstDay = OtherFunctions.convertToBaseDate(widget.calMode,
-        DateTime.utc(provider.currentYear, provider.currentMonth, 1));
+    BaseDateTime firstDay = BaseDateTime(provider.currentDay.year, provider.currentDay.month, 1);
 
-    BaseDateTime lastDay = OtherFunctions.convertToBaseDate(widget.calMode,
-        DateTime.utc(provider.currentYear, provider.currentMonth + 1, 0));
+    BaseDateTime lastDay = BaseDateTime(provider.currentDay.year, provider.currentDay.month + 1, 0);
 
     indexToSkip = firstDay.weekday - 1;
     rowsNumber = ((lastDay.day + indexToSkip) / 7).ceil();
