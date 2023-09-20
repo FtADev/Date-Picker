@@ -47,77 +47,80 @@ class _UIPartState extends ConsumerState<UIPart> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      CalendarHeader(
-        monthName: widget.monthName,
-        monthStyle: Styles.s16w7b,
-        leftArrow: const Icon(
-          Icons.chevron_left,
-          size: 16,
+    return Directionality(
+      textDirection: widget.calMode == "p" ? TextDirection.rtl : TextDirection.ltr,
+      child: Column(children: [
+        CalendarHeader(
+          monthName: widget.monthName,
+          monthStyle: Styles.s16w7b,
+          leftArrow: const Icon(
+            Icons.chevron_left,
+            size: 16,
+          ),
+          rightArrow: const Icon(
+            Icons.chevron_right,
+            size: 16,
+          ),
         ),
-        rightArrow: const Icon(
-          Icons.chevron_right,
-          size: 16,
+        const SizedBox(
+          height: 10,
         ),
-      ),
-      const SizedBox(
-        height: 10,
-      ),
-      Container(
-        color: Colors.white,
-        child: Table(
-          // border: TableBorder.all(),
-          children: [
-            TableRow(children: [
-              ...List.generate(
-                // Week Days names
-                7,
-                (index) => WeekdayWidget(
-                  cellHeight: cellHeight,
-                  cellWidth: cellWidth,
-                  weekday: widget.weekdays[index],
-                ),
-              ),
-            ]),
-            ...List.generate(
-              widget.rowsNumber,
-              (rowIndex) => TableRow(children: [
+        Container(
+          color: Colors.white,
+          child: Table(
+            // border: TableBorder.all(),
+            children: [
+              TableRow(children: [
                 ...List.generate(
+                  // Week Days names
                   7,
-                  (colIndex) {
-                    BaseDateTime currentDay = widget.firstDay.addDuration(
-                        ((rowIndex * 7) + colIndex) - widget.indexToSkip);
-                    if (widget.disableDates != null &&
-                        currentDay.isInList(widget.disableDates!)) {
-                      // for disable days
-                      return DisableCell(
-                        text: currentDay.getDay(),
-                        cellWidth: cellWidth,
-                        cellHeight: cellHeight,
-                      );
-                    } else {
-                      return widget.isRangeSelection
-                          ? generateRangeCell(
-                              currentDay: currentDay,
-                              firstDay: widget.firstDay,
-                              isNotPreviousMonth: ((rowIndex * 7) + colIndex) >=
-                                  widget.indexToSkip,
-                            )
-                          : generateSingleCell(
-                              currentDay: currentDay,
-                              firstDay: widget.firstDay,
-                              isNotPreviousMonth: ((rowIndex * 7) + colIndex) >=
-                                  widget.indexToSkip,
-                            );
-                    }
-                  },
+                  (index) => WeekdayWidget(
+                    cellHeight: cellHeight,
+                    cellWidth: cellWidth,
+                    weekday: widget.weekdays[index],
+                  ),
                 ),
               ]),
-            ),
-          ],
+              ...List.generate(
+                widget.rowsNumber,
+                (rowIndex) => TableRow(children: [
+                  ...List.generate(
+                    7,
+                    (colIndex) {
+                      BaseDateTime currentDay = widget.firstDay.addDuration(
+                          ((rowIndex * 7) + colIndex) - widget.indexToSkip);
+                      if (widget.disableDates != null &&
+                          currentDay.isInList(widget.disableDates!)) {
+                        // for disable days
+                        return DisableCell(
+                          text: currentDay.getDay(),
+                          cellWidth: cellWidth,
+                          cellHeight: cellHeight,
+                        );
+                      } else {
+                        return widget.isRangeSelection
+                            ? generateRangeCell(
+                                currentDay: currentDay,
+                                firstDay: widget.firstDay,
+                                isNotPreviousMonth: ((rowIndex * 7) + colIndex) >=
+                                    widget.indexToSkip,
+                              )
+                            : generateSingleCell(
+                                currentDay: currentDay,
+                                firstDay: widget.firstDay,
+                                isNotPreviousMonth: ((rowIndex * 7) + colIndex) >=
+                                    widget.indexToSkip,
+                              );
+                      }
+                    },
+                  ),
+                ]),
+              ),
+            ],
+          ),
         ),
-      ),
-    ]);
+      ]),
+    );
   }
 
   Widget generateSingleCell(
