@@ -41,16 +41,20 @@ class PersianDateTime extends BaseDateTime {
 
   @override
   PersianDateTime getFirstDayOfMonth() {
-    // Jalali j = Jalali.fromDateTime(DateTime(year, month, day));
-    // Jalali firstDay = j.withDay(1);
-    return PersianDateTime(year, month, 1);
+    Jalali j = Jalali.fromDateTime(DateTime(year, month, day));
+    Jalali firstDay = j.withDay(1);
+    DateTime utc = firstDay.toUtcDateTime();
+    PersianDateTime output = PersianDateTime(utc.year, utc.month, utc.day);
+    return output;
   }
 
   @override
   PersianDateTime getLastDayOfMonth() {
-    // Jalali j = Jalali.fromDateTime(DateTime(year, month, day));
-    // Jalali lastDay = j.withDay(j.monthLength);
-    return PersianDateTime(year, month + 1, 0);
+    Jalali j = Jalali.fromDateTime(DateTime(year, month, day));
+    Jalali firstDay = j.withDay(j.monthLength);
+    DateTime utc = firstDay.toUtcDateTime();
+    PersianDateTime output = PersianDateTime(utc.year, utc.month, utc.day);
+    return output;
   }
 
   @override
