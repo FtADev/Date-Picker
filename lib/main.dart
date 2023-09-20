@@ -1,6 +1,6 @@
+import 'package:custom_date_picker/core/base_datetime.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shamsi_date/shamsi_date.dart';
 
 import 'dialog/date_picker_dialog.dart';
 
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     showDialog(
         context: context,
         builder: (_) => MyDatePickerDialog(
-              initialDate: DateTime.now(),
+              initialDate: BaseDateTime.now(),
               showRange: false,
               showTime: false,
               showYear: true,

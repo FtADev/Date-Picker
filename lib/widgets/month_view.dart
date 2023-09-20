@@ -1,12 +1,7 @@
 import 'package:custom_date_picker/core/base_datetime.dart';
-import 'package:custom_date_picker/core/gregorian_datetime.dart';
-import 'package:custom_date_picker/core/other_functions.dart';
-import 'package:custom_date_picker/core/persian_datetime.dart';
 import 'package:custom_date_picker/widgets/ui_part.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
-import 'package:shamsi_date/shamsi_date.dart';
 
 import '../all_providers.dart';
 import '../provider/date_provider.dart';
@@ -48,9 +43,11 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
   Widget build(BuildContext context) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 
-    BaseDateTime firstDay = BaseDateTime(provider.currentDay.year, provider.currentDay.month, 1);
+    BaseDateTime firstDay =
+        BaseDateTime(provider.currentDay.year, provider.currentDay.month, 1);
 
-    BaseDateTime lastDay = BaseDateTime(provider.currentDay.year, provider.currentDay.month + 1, 0);
+    BaseDateTime lastDay = BaseDateTime(
+        provider.currentDay.year, provider.currentDay.month + 1, 0);
 
     indexToSkip = firstDay.weekday - 1;
     rowsNumber = ((lastDay.day + indexToSkip) / 7).ceil();

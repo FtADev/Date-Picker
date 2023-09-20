@@ -24,13 +24,9 @@ class PersianDateTime extends BaseDateTime {
   }
 
   @override
-  bool isToday() {
-    Jalali first = Jalali.fromDateTime(DateTime.now());
-
-    return first.year == PersianDateTime.now().year &&
-        first.month == PersianDateTime.now().month &&
-        first.day == PersianDateTime.now().day;
-  }
+  bool isToday() => year == PersianDateTime.now().year &&
+        month == PersianDateTime.now().month &&
+        day == PersianDateTime.now().day;
 
   @override
   String getDay() => OtherFunctions.convertToPersianNumber(Jalali.fromDateTime(DateTime(year, month, day)).day.toString());

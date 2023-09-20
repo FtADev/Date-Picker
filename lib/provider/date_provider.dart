@@ -61,7 +61,7 @@ class DateProvider extends ChangeNotifier {
     if (value != null) {
       if (selectedDay1 != null) {
         if (value.isBefore(selectedDay1!)) {
-          swapDays(value);
+          _swapDays(value);
         } else {
           _selectedDay2 = value;
         }
@@ -73,7 +73,7 @@ class DateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void swapDays(BaseDateTime value) {
+  void _swapDays(BaseDateTime value) {
     final swapVar = selectedDay1;
     selectedDay1 = value;
     selectedDay2 = swapVar;

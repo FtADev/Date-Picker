@@ -204,8 +204,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
   Widget normalDate() {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 
-    return Text(provider.currentDay.toString(),
-        style: Styles.s16w7p);
+    return Text(provider.currentDay.toString(), style: Styles.s16w7p);
   }
 
   Widget rangeTime() {
