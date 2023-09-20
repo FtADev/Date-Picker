@@ -1,4 +1,5 @@
 import 'package:custom_date_picker/core/base_datetime.dart';
+import 'package:intl/intl.dart';
 
 class GregorianDateTime extends BaseDateTime {
   GregorianDateTime(super.year, super.month, super.day);
@@ -69,5 +70,11 @@ class GregorianDateTime extends BaseDateTime {
         return "Sunday";
     }
     return "";
+  }
+
+  @override
+  String toString() {
+    String output = DateFormat.yMMMMd().format(DateTime(year, month, day));
+    return output;
   }
 }
