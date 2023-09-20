@@ -182,7 +182,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                 child: Row(
                   children: [
                     const Text("From: ", style: Styles.s16w7b),
-                    Text(DateFormat.yMMMMd().format(provider.selectedDay1!),
+                    Text(provider.selectedDay1?.toString() ?? "",
                         style: Styles.s16w7p),
                   ],
                 ),
@@ -192,7 +192,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
             ? Row(
                 children: [
                   const Text("To: ", style: Styles.s16w7b),
-                  Text(DateFormat.yMMMMd().format(provider.selectedDay2!),
+                  Text(provider.selectedDay2?.toString() ?? "",
                       style: Styles.s16w7p),
                 ],
               )

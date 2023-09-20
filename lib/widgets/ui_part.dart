@@ -87,8 +87,7 @@ class _UIPartState extends ConsumerState<UIPart> {
                 ...List.generate(
                   7,
                   (colIndex) {
-                    BaseDateTime currentDay = OtherFunctions.convertToBaseDate(widget.calMode, widget.firstDay.add(Duration(
-                        days: ((rowIndex * 7) + colIndex) - widget.indexToSkip)));
+                    BaseDateTime currentDay = widget.firstDay.addDuration(((rowIndex * 7) + colIndex) - widget.indexToSkip);
 
                     if (widget.disableDates != null &&
                         currentDay.isInList(widget.disableDates!)) {

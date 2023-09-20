@@ -24,18 +24,28 @@ class BaseDateTime extends DateTime {
 
   String getWeekdayName(int index) => "";
 
-  bool isInMonth(BaseDateTime date) => false;
+  bool isInMonth(BaseDateTime date) {
+    return month == date.month;
+  }
 
-  bool isToday() => false;
+  bool isToday() => year == BaseDateTime.now().year &&
+      month == BaseDateTime.now().month &&
+      day == BaseDateTime.now().day;
 
-  bool compareWithoutTime(BaseDateTime date) => false;
+  bool compareWithoutTime(BaseDateTime date) => day == date.day && month == date.month && year == date.year;
 
-  String getDayNumber(BaseDateTime date) => "";
+  int getDayNumber(BaseDateTime date) => day;
 
   String getDay() => day.toString();
 
   int getMonth() => month;
 
   int getYear() => year;
+
+  BaseDateTime getFirstDayOfMonth() => BaseDateTime.now();
+
+  BaseDateTime getLastDayOfMonth() => BaseDateTime.now();
+
+  BaseDateTime addDuration(int days) => BaseDateTime.now();
 
 }

@@ -7,18 +7,17 @@ class GregorianDateTime extends BaseDateTime {
   GregorianDateTime.now() : super.now();
 
   @override
-  bool isInMonth(BaseDateTime date) => month == date.month;
+  GregorianDateTime getFirstDayOfMonth() => GregorianDateTime(year, month, 1);
 
   @override
-  bool compareWithoutTime(DateTime date) {
-    return day == date.day && month == date.month && year == date.year;
+  GregorianDateTime getLastDayOfMonth() => GregorianDateTime(year, month + 1, 0);
+
+  @override
+  GregorianDateTime addDuration(int days) {
+    DateTime date = DateTime(year, month, day);
+    date = date.add(Duration(days: days));
+    return GregorianDateTime(date.year, date.month, date.day);
   }
-
-  @override
-  bool isToday() =>
-      year == GregorianDateTime.now().year &&
-      month == GregorianDateTime.now().month &&
-      day == GregorianDateTime.now().day;
 
   @override
   String getMonthName(int index) {

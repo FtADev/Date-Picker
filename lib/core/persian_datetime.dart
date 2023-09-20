@@ -24,18 +24,42 @@ class PersianDateTime extends BaseDateTime {
   }
 
   @override
-  bool isToday() => year == PersianDateTime.now().year &&
-        month == PersianDateTime.now().month &&
-        day == PersianDateTime.now().day;
+  bool isToday() =>
+      year == PersianDateTime.now().year &&
+      month == PersianDateTime.now().month &&
+      day == PersianDateTime.now().day;
 
   @override
-  String getDay() => OtherFunctions.convertToPersianNumber(Jalali.fromDateTime(DateTime(year, month, day)).day.toString());
+  String getDay() => OtherFunctions.convertToPersianNumber(
+      Jalali.fromDateTime(DateTime(year, month, day)).day.toString());
 
   @override
   int getMonth() => Jalali.fromDateTime(DateTime(year, month, day)).month;
 
   @override
   int getYear() => Jalali.fromDateTime(DateTime(year, month, day)).year;
+
+  @override
+  PersianDateTime getFirstDayOfMonth() {
+    // Jalali j = Jalali.fromDateTime(DateTime(year, month, day));
+    // Jalali firstDay = j.withDay(1);
+    return PersianDateTime(year, month, 1);
+  }
+
+  @override
+  PersianDateTime getLastDayOfMonth() {
+    // Jalali j = Jalali.fromDateTime(DateTime(year, month, day));
+    // Jalali lastDay = j.withDay(j.monthLength);
+    return PersianDateTime(year, month + 1, 0);
+  }
+
+  @override
+  PersianDateTime addDuration(int days) {
+    // Jalali j = Jalali.fromDateTime(DateTime(year, month, day));
+    // Jalali nextDay = j.withDay(days);
+    // print(nextDay);
+    return PersianDateTime(year, month, day + days);
+  }
 
   @override
   String getMonthName(int index) {
