@@ -1,4 +1,6 @@
 import 'package:custom_date_picker/core/base_datetime.dart';
+import 'package:custom_date_picker/core/gregorian_datetime.dart';
+import 'package:custom_date_picker/core/persian_datetime.dart';
 import 'package:custom_date_picker/widgets/ui_part.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +25,7 @@ class MonthView extends ConsumerStatefulWidget {
 }
 
 class _RangeSelectionMonthView extends ConsumerState<MonthView> {
-  List<String> weekDayNames = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  List<String> weekDayNames = [];
 
   // rowsNumber is the number of weeks in each month,
   // based on starting/ending weekdays.
@@ -51,10 +53,7 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
 
     rowsNumber = ((lastDay.getDayNumber() + indexToSkip) / 7).ceil();
 
-    // print(firstDay);
-    // for(int i=1;i<8;i++) {
-    //   weekDayNames.add(DateFormat('E').format(firstDay.add(Duration(days: i))));
-    // }
+    setWeekDays();
 
     return UIPart(
       calMode: widget.calMode,
@@ -66,5 +65,19 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
       disableDates: widget.disableDates,
       isRangeSelection: widget.isRangeSelection,
     );
+  }
+
+  void setWeekDays() {
+    if (weekDayNames.isEmpty) {
+      if (widget.calMode == "p") {
+        for (int i = 1; i < 8; i++) {
+          weekDayNames.add(PersianDateTime.getWeekdayName(i).substring(0, 1));
+        }
+      } else {
+        for (int i = 1; i < 8; i++) {
+          weekDayNames.add(GregorianDateTime.getWeekdayName(i).substring(0, 1));
+        }
+      }
+    }
   }
 }

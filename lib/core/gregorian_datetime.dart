@@ -50,8 +50,7 @@ class GregorianDateTime extends BaseDateTime {
     return "";
   }
 
-  @override
-  String getWeekdayName(int index) {
+  static String getWeekdayName(int index) {
     switch (index) {
       case 1:
         return "Monday";

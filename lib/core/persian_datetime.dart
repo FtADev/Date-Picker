@@ -99,23 +99,22 @@ class PersianDateTime extends BaseDateTime {
     return "";
   }
 
-  @override
-  String getWeekdayName(int index) {
+  static String getWeekdayName(int index) {
     switch (index) {
       case 1:
-        return "شنبه";
-      case 2:
-        return "یکشنبه";
-      case 3:
         return "دوشنبه";
-      case 4:
+      case 2:
         return "سه‌شنبه";
-      case 5:
+      case 3:
         return "چهارشنبه";
-      case 6:
+      case 4:
         return "پنج‌شنبه";
-      case 7:
+      case 5:
         return "جمعه";
+      case 6:
+        return "شنبه";
+      case 7:
+        return "یکشنبه";
     }
     return "";
   }

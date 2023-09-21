@@ -22,7 +22,7 @@ class BaseDateTime extends DateTime {
 
   String getMonthName(int index) => "";
 
-  String getWeekdayName(int index) => "";
+  // static String getWeekdayName(int index) => "";
 
   bool isInMonth(BaseDateTime date) {
     return month == date.month;
