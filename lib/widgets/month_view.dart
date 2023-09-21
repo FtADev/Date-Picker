@@ -1,5 +1,6 @@
 import 'package:custom_date_picker/core/base_datetime.dart';
 import 'package:custom_date_picker/core/gregorian_datetime.dart';
+import 'package:custom_date_picker/core/other_functions.dart';
 import 'package:custom_date_picker/core/persian_datetime.dart';
 import 'package:custom_date_picker/widgets/ui_part.dart';
 import 'package:flutter/material.dart';
@@ -45,9 +46,13 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
   Widget build(BuildContext context) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 
-    BaseDateTime firstDay = provider.currentDay.getFirstDayOfMonth();
+    DateTime currentDate = DateTime(
+        provider.currentYear, provider.currentMonth, provider.currentDay.day);
+    BaseDateTime currentBasedDate =
+        OtherFunctions.convertToBaseDate(widget.calMode, currentDate);
+    BaseDateTime firstDay = currentBasedDate.getFirstDayOfMonth();
 
-    BaseDateTime lastDay = provider.currentDay.getLastDayOfMonth();
+    BaseDateTime lastDay = currentBasedDate.getLastDayOfMonth();
 
     indexToSkip = firstDay.weekday - 1;
 
@@ -59,7 +64,8 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
       calMode: widget.calMode,
       firstDay: firstDay,
       indexToSkip: indexToSkip,
-      monthName: firstDay.getMonthName(provider.currentDay.getMonth()),
+      monthName:
+          "${firstDay.getMonthName(firstDay.getMonth())} ${firstDay.getYear()}",
       rowsNumber: rowsNumber,
       weekdays: weekDayNames,
       disableDates: widget.disableDates,
@@ -69,15 +75,14 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
 
   void setWeekDays() {
     weekDayNames.clear();
-      if (widget.calMode == "p") {
-        for (int i = 1; i < 8; i++) {
-          weekDayNames.add(PersianDateTime.getWeekdayName(i).substring(0, 1));
-        }
-      } else {
-        for (int i = 1; i < 8; i++) {
-          weekDayNames.add(GregorianDateTime.getWeekdayName(i).substring(0, 1));
-        }
+    if (widget.calMode == "p") {
+      for (int i = 1; i < 8; i++) {
+        weekDayNames.add(PersianDateTime.getWeekdayName(i).substring(0, 1));
+      }
+    } else {
+      for (int i = 1; i < 8; i++) {
+        weekDayNames.add(GregorianDateTime.getWeekdayName(i).substring(0, 1));
       }
     }
-
+  }
 }

@@ -126,8 +126,6 @@ class DateProvider extends ChangeNotifier {
   set currentYear(int value) {
     if (value != _currentYear) {
       _currentYear = value;
-      currentDay = OtherFunctions.convertToBaseDate(
-          calMode, DateTime(currentYear, currentMonth, currentDay.day));
       currentMonth = currentDay.month;
       notifyListeners();
     }

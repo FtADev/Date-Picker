@@ -68,6 +68,15 @@ class PersianDateTime extends BaseDateTime {
     return PersianDateTime(year, month, day + days);
   }
 
+  // @override
+  // PersianDateTime addMonth(int months) {
+  //   Jalali j = Jalali.fromDateTime(DateTime(year, month, day));
+  //   Jalali firstDayOfNextMonth = j.withMonth(months);
+  //   DateTime utc = firstDayOfNextMonth.toUtcDateTime();
+  //   PersianDateTime output = PersianDateTime(utc.year, utc.month, utc.day);
+  //   return output;
+  // }
+
   @override
   String getMonthName(int index) {
     switch (index) {
