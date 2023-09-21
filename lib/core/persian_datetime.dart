@@ -121,7 +121,7 @@ class PersianDateTime extends BaseDateTime {
 
   @override
   String toString() {
-    String output = "${getYear()} ${getMonthName(getMonth())} ${getDay()}";
+    String output = "${getDay()} ${getMonthName(getMonth())} ${getYear()}";
     output = OtherFunctions.convertToPersianNumber(output);
     return output;
   }
