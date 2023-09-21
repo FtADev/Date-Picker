@@ -68,7 +68,7 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
   }
 
   void setWeekDays() {
-    if (weekDayNames.isEmpty) {
+    weekDayNames.clear();
       if (widget.calMode == "p") {
         for (int i = 1; i < 8; i++) {
           weekDayNames.add(PersianDateTime.getWeekdayName(i).substring(0, 1));
@@ -79,5 +79,5 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
         }
       }
     }
-  }
+
 }
