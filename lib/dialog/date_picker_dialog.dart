@@ -73,96 +73,99 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
         borderRadius: BorderRadius.circular(20),
       ),
       children: [
-        Container(
-          width: 300,
-          decoration: BoxDecoration(
-            color: AppColor.white,
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 36, vertical: 25),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text("Date:", style: Styles.s18w7b),
-                    Spacer(),
-                    widget.showYear
-                        ? SizedBox(
-                            width: 100,
-                            child: DropDownWidget<int>(
-                              items: yearList,
-                              hintText: provider.currentYear.toString(),
-                              hintStyle: Styles.s16w7p,
-                              valueStyle: Styles.s16w7p,
-                              onChanged: (int? year) {
-                                if (year != null) {
-                                  provider.currentYear = year;
-                                }
-                              },
-                              value: provider.currentYear,
-                            ),
-                          )
-                        : Container(),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                widget.showRange ? rangeDate() : normalDate(),
-                SizedBox(
-                  height: 10,
-                ),
-                MonthView(
-                  calMode: widget.calMode,
-                  disableDates: widget.disableDates,
-                  isRangeSelection: widget.showRange,
-                ),
-                widget.showTime
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                            const Divider(
-                              color: AppColor.gray0,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            const Text("Time:", style: Styles.s18w7b),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            widget.showRange ? rangeTime() : normalTime(),
-                          ])
-                    : Container(),
-                SizedBox(
-                  height: 30,
-                ),
-                RoundedButton(
-                  title: "Submit",
-                  onTap: () {
-                    if (widget.showRange) {
-                      if (provider.selectedDay1 == null) {
-                        print("Please select start date");
-                        return;
+        Directionality(
+          textDirection: OtherFunctions.getTextDirection(widget.calMode),
+          child: Container(
+            width: 300,
+            decoration: BoxDecoration(
+              color: AppColor.white,
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 36, vertical: 25),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text("Date:", style: Styles.s18w7b),
+                      Spacer(),
+                      widget.showYear
+                          ? SizedBox(
+                              width: 100,
+                              child: DropDownWidget<int>(
+                                items: yearList,
+                                hintText: provider.currentYear.toString(),
+                                hintStyle: Styles.s16w7p,
+                                valueStyle: Styles.s16w7p,
+                                onChanged: (int? year) {
+                                  if (year != null) {
+                                    provider.currentYear = year;
+                                  }
+                                },
+                                value: provider.currentYear,
+                              ),
+                            )
+                          : Container(),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  widget.showRange ? rangeDate() : normalDate(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  MonthView(
+                    calMode: widget.calMode,
+                    disableDates: widget.disableDates,
+                    isRangeSelection: widget.showRange,
+                  ),
+                  widget.showTime
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                              const Divider(
+                                color: AppColor.gray0,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Text("Time:", style: Styles.s18w7b),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              widget.showRange ? rangeTime() : normalTime(),
+                            ])
+                      : Container(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  RoundedButton(
+                    title: "Submit",
+                    onTap: () {
+                      if (widget.showRange) {
+                        if (provider.selectedDay1 == null) {
+                          print("Please select start date");
+                          return;
+                        }
+                        if (provider.selectedDay2 == null) {
+                          print("Please select end date");
+                          return;
+                        }
                       }
-                      if (provider.selectedDay2 == null) {
-                        print("Please select end date");
-                        return;
+                      if (widget.showRange) {
+                        print("First day: ${provider.selectedDay1}");
+                        print("Second day: ${provider.selectedDay2}");
+                      } else {
+                        print("Selected day: ${provider.currentDay}");
                       }
-                    }
-                    if (widget.showRange) {
-                      print("First day: ${provider.selectedDay1}");
-                      print("Second day: ${provider.selectedDay2}");
-                    } else {
-                      print("Selected day: ${provider.currentDay}");
-                    }
-                    Navigator.of(context).pop();
-                  },
-                  height: 55,
-                )
-              ],
+                      Navigator.of(context).pop();
+                    },
+                    height: 55,
+                  )
+                ],
+              ),
             ),
           ),
         )

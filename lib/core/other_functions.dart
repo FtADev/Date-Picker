@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'base_datetime.dart';
 import 'gregorian_datetime.dart';
 import 'persian_datetime.dart';
@@ -11,6 +13,15 @@ class OtherFunctions {
         return PersianDateTime(date.year, date.month, date.day);
       default:
         return BaseDateTime(date.year, date.month, date.day);
+    }
+  }
+
+  static TextDirection getTextDirection(String char) {
+    switch (char) {
+      case "p":
+        return TextDirection.rtl;
+      default:
+        return TextDirection.ltr;
     }
   }
 

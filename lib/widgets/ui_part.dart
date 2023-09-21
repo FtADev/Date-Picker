@@ -1,5 +1,6 @@
 import 'package:custom_date_picker/core/base_datetime.dart';
 import 'package:custom_date_picker/core/extensions.dart';
+import 'package:custom_date_picker/core/other_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -48,7 +49,7 @@ class _UIPartState extends ConsumerState<UIPart> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: widget.calMode == "p" ? TextDirection.rtl : TextDirection.ltr,
+      textDirection: OtherFunctions.getTextDirection(widget.calMode),
       child: Column(children: [
         CalendarHeader(
           monthName: widget.monthName,
