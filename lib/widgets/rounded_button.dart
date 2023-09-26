@@ -40,13 +40,10 @@ class RoundedButton extends StatelessWidget {
                       color: Colors.white,
                     ),
                   )
-                : Container(
-                    // margin: EdgeInsets.symmetric(vertical: 17),
-                    child: Text(
-                      title,
-                      style: Styles.s18w7w,
-                    ),
-                  ),
+                : Text(
+                  title,
+                  style: Styles.s18w7w,
+                ),
           ),
         ),
       ),

@@ -29,7 +29,7 @@ class MyDatePickerDialog extends ConsumerStatefulWidget {
     this.showTime = true,
     this.showYear = false,
     this.showRange = false,
-    this.calMode = "g",
+    this.calMode = "g", //default mode
   }) : super(key: key);
 
   @override
@@ -45,6 +45,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
   @override
   void initState() {
     int currentYear = DateTime.now().year;
+    //TODO(Should be unlimited)
     for (int i = currentYear; i >= currentYear - 20; i--) {
       yearList.add(i);
     }
@@ -56,12 +57,13 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
     selectedTime2 = TimeOfDay(
         hour: widget.initialDate.hour, minute: widget.initialDate.minute);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      ref.watch(AllProvider.dateProvider).calMode = widget.calMode;
-      ref.watch(AllProvider.dateProvider).currentDay =
+      DateProvider provider = ref.watch(AllProvider.dateProvider);
+      provider.calMode = widget.calMode;
+      provider.currentDay =
           OtherFunctions.convertToBaseDate(widget.calMode, widget.initialDate);
-      ref.watch(AllProvider.dateProvider).showDay =
+      provider.showDay =
           OtherFunctions.convertToBaseDate(widget.calMode, widget.initialDate);
-      ref.watch(AllProvider.dateProvider).currentYear = yearList.first;
+      provider.currentYear = yearList.first;
     });
     super.initState();
   }
@@ -79,19 +81,19 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
           textDirection: OtherFunctions.getTextDirection(widget.calMode),
           child: Container(
             width: 300,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColor.white,
               borderRadius: BorderRadius.all(Radius.circular(20)),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 36, vertical: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 25),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Text("Date:", style: Styles.s18w7b),
-                      Spacer(),
+                      const Text("Date:", style: Styles.s18w7b),
+                      const Spacer(),
                       widget.showYear
                           ? SizedBox(
                               width: 100,
@@ -111,11 +113,11 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                           : Container(),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   widget.showRange ? rangeDate() : normalDate(),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   MonthView(
@@ -134,13 +136,13 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                                 height: 10,
                               ),
                               const Text("Time:", style: Styles.s18w7b),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               widget.showRange ? rangeTime() : normalTime(),
                             ])
                       : Container(),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   RoundedButton(
@@ -148,19 +150,19 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                     onTap: () {
                       if (widget.showRange) {
                         if (provider.selectedDay1 == null) {
-                          print("Please select start date");
+                          debugPrint("Please select start date");
                           return;
                         }
                         if (provider.selectedDay2 == null) {
-                          print("Please select end date");
+                          debugPrint("Please select end date");
                           return;
                         }
                       }
                       if (widget.showRange) {
-                        print("First day: ${provider.selectedDay1}");
-                        print("Second day: ${provider.selectedDay2}");
+                        debugPrint("First day: ${provider.selectedDay1}");
+                        debugPrint("Second day: ${provider.selectedDay2}");
                       } else {
-                        print("Selected day: ${provider.currentDay}");
+                        debugPrint("Selected day: ${provider.currentDay}");
                       }
                       Navigator.of(context).pop();
                     },
@@ -183,7 +185,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
       children: [
         provider.selectedDay1 != null
             ? Container(
-                margin: EdgeInsets.only(bottom: 5),
+                margin: const EdgeInsets.only(bottom: 5),
                 child: Row(
                   children: [
                     const Text("From: ", style: Styles.s16w7b),
@@ -243,11 +245,11 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                 style: Styles.s16w7p),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
-        Text("to", style: Styles.s16w7b),
-        SizedBox(
+        const Text("to", style: Styles.s16w7b),
+        const SizedBox(
           width: 10,
         ),
         MouseRegion(

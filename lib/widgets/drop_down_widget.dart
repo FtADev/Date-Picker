@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../app_colors.dart';
 import '../styles.dart';
 
-
 class DropDownWidget<T> extends StatelessWidget {
   final T? value;
   final List<T> items;
@@ -33,11 +32,17 @@ class DropDownWidget<T> extends StatelessWidget {
         labelText: labelText,
         labelStyle: labelStyle ?? Styles.s14w3g5,
         enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.white1, width: 1),
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+          borderSide: BorderSide(color: AppColor.white1, width: 1),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
         focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.white1, width: 1),
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+          borderSide: BorderSide(color: AppColor.white1, width: 1),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
       ),
       menuMaxHeight: 300,
       hint: Text(
@@ -45,7 +50,10 @@ class DropDownWidget<T> extends StatelessWidget {
         style: hintStyle ?? Styles.s18w7b,
       ),
       value: value,
-      icon: Icon(Icons.arrow_drop_down_outlined, size: 16,),
+      icon: const Icon(
+        Icons.arrow_drop_down_outlined,
+        size: 16,
+      ),
       isExpanded: true,
       // itemHeight: 48,
       // iconSize: 16,

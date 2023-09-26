@@ -78,7 +78,7 @@ class PersianDateTime extends BaseDateTime {
   }
 
   @override
-  PersianDateTime decMonth(int months) {
+  PersianDateTime subMonth(int months) {
     Jalali j = Jalali.fromDateTime(DateTime(year, month, day));
     Jalali dayOfLastMonth = j - j.monthLength * months;
     DateTime utc = dayOfLastMonth.toUtcDateTime();

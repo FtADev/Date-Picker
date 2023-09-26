@@ -22,8 +22,6 @@ class BaseDateTime extends DateTime {
 
   String getMonthName(int index) => "";
 
-  // static String getWeekdayName(int index) => "";
-
   bool isInMonth(BaseDateTime date) {
     return month == date.month;
   }
@@ -44,13 +42,15 @@ class BaseDateTime extends DateTime {
 
   int getYear() => year;
 
+  BaseDateTime addMonth(int months) => BaseDateTime(year, month + months, day);
+
+  BaseDateTime subMonth(int months) => BaseDateTime(year, month - months, day);
+
+  // Must implement in sub classes:
+
   BaseDateTime getFirstDayOfMonth() => BaseDateTime.now();
 
   BaseDateTime getLastDayOfMonth() => BaseDateTime.now();
 
   BaseDateTime addDuration(int days) => BaseDateTime.now();
-
-  BaseDateTime addMonth(int months) => BaseDateTime(year, month + months, day);
-
-  BaseDateTime decMonth(int months) => BaseDateTime(year, month - months, day);
 }

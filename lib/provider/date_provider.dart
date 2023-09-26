@@ -120,17 +120,17 @@ class DateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _currentMonth = BaseDateTime.now().month;
-
-  int get currentMonth => _currentMonth;
-
-  set currentMonth(int value) {
-    if (value != _currentMonth) {
-      _currentMonth = value;
-      showDay = BaseDateTime(showDay.year, value, showDay.day);
-      notifyListeners();
-    }
-  }
+  // int _currentMonth = BaseDateTime.now().month;
+  //
+  // int get currentMonth => _currentMonth;
+  //
+  // set currentMonth(int value) {
+  //   if (value != _currentMonth) {
+  //     _currentMonth = value;
+  //     showDay = BaseDateTime(showDay.year, value, showDay.day);
+  //     notifyListeners();
+  //   }
+  // }
 
   int _currentYear = BaseDateTime.now().year;
 
@@ -140,12 +140,12 @@ class DateProvider extends ChangeNotifier {
     if (value != _currentYear) {
       _currentYear = value;
       showDay = BaseDateTime(value, showDay.month, showDay.day);
-      currentMonth = currentDay.month;
+      // currentMonth = currentDay.month;
       notifyListeners();
     }
   }
 
   void nextMonth() => showDay = showDay.addMonth(1);
 
-  void lastMonth() => showDay = showDay.decMonth(1);
+  void lastMonth() => showDay = showDay.subMonth(1);
 }
