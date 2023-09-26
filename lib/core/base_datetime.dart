@@ -28,11 +28,13 @@ class BaseDateTime extends DateTime {
     return month == date.month;
   }
 
-  bool isToday() => year == BaseDateTime.now().year &&
+  bool isToday() =>
+      year == BaseDateTime.now().year &&
       month == BaseDateTime.now().month &&
       day == BaseDateTime.now().day;
 
-  bool compareWithoutTime(BaseDateTime date) => day == date.day && month == date.month && year == date.year;
+  bool compareWithoutTime(BaseDateTime date) =>
+      day == date.day && month == date.month && year == date.year;
 
   int getDayNumber() => day;
 
@@ -48,5 +50,7 @@ class BaseDateTime extends DateTime {
 
   BaseDateTime addDuration(int days) => BaseDateTime.now();
 
-  // BaseDateTime addMonth(int months) => BaseDateTime.now();
+  BaseDateTime addMonth(int months) => BaseDateTime(year, month + months, day);
+
+  BaseDateTime decMonth(int months) => BaseDateTime(year, month - months, day);
 }

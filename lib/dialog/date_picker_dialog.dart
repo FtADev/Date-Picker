@@ -59,6 +59,8 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
       ref.watch(AllProvider.dateProvider).calMode = widget.calMode;
       ref.watch(AllProvider.dateProvider).currentDay =
           OtherFunctions.convertToBaseDate(widget.calMode, widget.initialDate);
+      ref.watch(AllProvider.dateProvider).showDay =
+          OtherFunctions.convertToBaseDate(widget.calMode, widget.initialDate);
       ref.watch(AllProvider.dateProvider).currentYear = yearList.first;
     });
     super.initState();

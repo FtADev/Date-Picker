@@ -47,7 +47,7 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
 
     DateTime currentDate = DateTime(
-        provider.currentDay.year, provider.currentDay.month, provider.currentDay.day);
+        provider.showDay.year, provider.showDay.month, provider.showDay.day);
     BaseDateTime currentBasedDate =
         OtherFunctions.convertToBaseDate(widget.calMode, currentDate);
     BaseDateTime firstDay = currentBasedDate.getFirstDayOfMonth();

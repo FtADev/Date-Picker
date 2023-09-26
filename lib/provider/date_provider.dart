@@ -26,6 +26,18 @@ class DateProvider extends ChangeNotifier {
     }
   }
 
+  BaseDateTime _showDay = BaseDateTime.now();
+
+  BaseDateTime get showDay => _showDay;
+
+  set showDay(BaseDateTime value) {
+    if (value != _showDay) {
+      _showDay = value;
+      notifyListeners();
+    }
+  }
+
+
   BaseDateTime? _selectedDay1;
 
   BaseDateTime? get selectedDay1 => _selectedDay1;
@@ -115,6 +127,7 @@ class DateProvider extends ChangeNotifier {
   set currentMonth(int value) {
     if (value != _currentMonth) {
       _currentMonth = value;
+      showDay = BaseDateTime(showDay.year, value, showDay.day);
       notifyListeners();
     }
   }
@@ -126,12 +139,13 @@ class DateProvider extends ChangeNotifier {
   set currentYear(int value) {
     if (value != _currentYear) {
       _currentYear = value;
+      showDay = BaseDateTime(value, showDay.month, showDay.day);
       currentMonth = currentDay.month;
       notifyListeners();
     }
   }
 
-  void nextMonth() => currentMonth++;
+  void nextMonth() => showDay = showDay.addMonth(1);
 
-  void lastMonth() => currentMonth--;
+  void lastMonth() => showDay = showDay.decMonth(1);
 }

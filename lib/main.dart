@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
               showRange: false,
               showTime: false,
               showYear: true,
-              calMode: "p",
+              calMode: "g",
               onSubmitTap: (_) {
                 Navigator.of(context).pop();
               },
