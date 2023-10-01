@@ -44,11 +44,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
 
   @override
   void initState() {
-    int currentYear = DateTime.now().year;
-    //TODO(Should be unlimited)
-    for (int i = currentYear; i >= currentYear - 20; i--) {
-      yearList.add(i);
-    }
+    setYearsList();
 
     selectedTime = TimeOfDay(
         hour: widget.initialDate.hour, minute: widget.initialDate.minute);
@@ -66,6 +62,16 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
       provider.currentYear = yearList.first;
     });
     super.initState();
+  }
+
+  void setYearsList() {
+    yearList.clear();
+    int currentYear = DateTime.now().year;
+
+    //TODO(Should be unlimited)
+    for (int i = currentYear; i >= currentYear - 20; i--) {
+      yearList.add(i);
+    }
   }
 
   @override
