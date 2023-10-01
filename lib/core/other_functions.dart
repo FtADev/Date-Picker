@@ -1,24 +1,26 @@
 import 'dart:ui';
 
+import 'package:custom_date_picker/core/calendar_mode.dart';
+
 import 'base_datetime.dart';
 import 'gregorian_datetime.dart';
 import 'persian_datetime.dart';
 
 class OtherFunctions {
-  static BaseDateTime convertToBaseDate(String char, DateTime date) {
+  static BaseDateTime convertToBaseDate(CalendarMode char, DateTime date) {
     switch (char) {
-      case "g":
+      case CalendarMode.GREGORIAN:
         return GregorianDateTime(date.year, date.month, date.day);
-      case "p":
+      case CalendarMode.PERSIAN:
         return PersianDateTime(date.year, date.month, date.day);
       default:
         return BaseDateTime(date.year, date.month, date.day);
     }
   }
 
-  static TextDirection getTextDirection(String char) {
+  static TextDirection getTextDirection(CalendarMode char) {
     switch (char) {
-      case "p":
+      case CalendarMode.PERSIAN:
         return TextDirection.rtl;
       default:
         return TextDirection.ltr;

@@ -1,4 +1,5 @@
 import 'package:custom_date_picker/core/base_datetime.dart';
+import 'package:custom_date_picker/core/calendar_mode.dart';
 import 'package:custom_date_picker/core/gregorian_datetime.dart';
 import 'package:custom_date_picker/core/other_functions.dart';
 import 'package:custom_date_picker/core/persian_datetime.dart';
@@ -12,7 +13,7 @@ import '../provider/date_provider.dart';
 class MonthView extends ConsumerStatefulWidget {
   final List<DateTime>? disableDates;
   final bool isRangeSelection;
-  final String calMode;
+  final CalendarMode calMode;
 
   const MonthView({
     required this.calMode,
