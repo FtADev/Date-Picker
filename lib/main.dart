@@ -6,8 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'all_providers.dart';
 import 'dialog/date_picker_dialog.dart';
-import 'styles.dart';
-import 'widgets/drop_down_widget.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -38,9 +36,7 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
-
   List<CalendarMode> calendarModeList = CalendarMode.values;
-
 
   void _showRangePicker(MainProvider provider) {
     showDialog(
@@ -72,39 +68,27 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("Calendar mode:"),
-                // DropDownWidget<CalendarMode>(
-                //   items: CalendarMode.values,
-                //   // hintText: provider.calMode.name,
-                //   hintStyle: Styles.s16w7p,
-                //   valueStyle: Styles.s16w7p,
-                //   onChanged: (CalendarMode? mode) {
-                //     if(mode != null) {
-                //       provider.calMode = mode;
-                //     }
-                //   },
-                //   value: provider.calMode,
-                // )
-                SizedBox(width: 10,),
+                const Text("Calendar mode:"),
+                const SizedBox(
+                  width: 10,
+                ),
                 DropdownButton<CalendarMode>(
                     value: provider.calMode,
                     onChanged: (CalendarMode? newValue) {
-                      if(newValue != null) {
+                      if (newValue != null) {
                         provider.calMode = newValue;
                       }
                     },
                     items: CalendarMode.values.map((CalendarMode classType) {
                       return DropdownMenuItem<CalendarMode>(
-                          value: classType,
-                          child: Text(classType.name));
-                    }).toList()
-                )
+                          value: classType, child: Text(classType.name));
+                    }).toList())
               ],
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("Show Range"),
+                const Text("Show Range"),
                 Switch(
                   value: provider.showRange,
                   onChanged: (bool value) {
@@ -116,7 +100,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("Show Time"),
+                const Text("Show Time"),
                 Switch(
                   value: provider.showTime,
                   onChanged: (bool value) {
@@ -128,7 +112,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("Show Year"),
+                const Text("Show Year"),
                 Switch(
                   value: provider.showYear,
                   onChanged: (bool value) {
@@ -147,7 +131,6 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       ),
     );
   }
-
 }
 
 class SwitchExample extends StatefulWidget {
@@ -175,4 +158,3 @@ class _SwitchExampleState extends State<SwitchExample> {
     );
   }
 }
-
