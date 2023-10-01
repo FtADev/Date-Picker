@@ -2,12 +2,14 @@ import 'package:custom_date_picker/core/base_datetime.dart';
 import 'package:custom_date_picker/core/other_functions.dart';
 import 'package:flutter/material.dart';
 
+import '../core/calendar_mode.dart';
+
 class DateProvider extends ChangeNotifier {
-  String _calMode = "g";
+  CalendarMode _calMode = CalendarMode.GREGORIAN;
 
-  String get calMode => _calMode;
+  CalendarMode get calMode => _calMode;
 
-  set calMode(String value) {
+  set calMode(CalendarMode value) {
     if (value != _calMode) {
       _calMode = value;
       debugPrint("CalMode change to $_calMode");

@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../../../all_providers.dart';
 import '../../widgets/drop_down_widget.dart';
 import '../app_colors.dart';
+import '../core/calendar_mode.dart';
 import '../functions.dart';
 import '../provider/date_provider.dart';
 import '../styles.dart';
@@ -19,7 +20,7 @@ class MyDatePickerDialog extends ConsumerStatefulWidget {
   final bool showTime;
   final bool showYear;
   final bool showRange;
-  final String calMode;
+  final CalendarMode calMode;
 
   const MyDatePickerDialog({
     this.disableDates,
@@ -29,7 +30,7 @@ class MyDatePickerDialog extends ConsumerStatefulWidget {
     this.showTime = true,
     this.showYear = false,
     this.showRange = false,
-    this.calMode = "g", //default mode
+    this.calMode = CalendarMode.GREGORIAN, //default mode
   }) : super(key: key);
 
   @override
@@ -44,11 +45,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
 
   @override
   void initState() {
-    int currentYear = DateTime.now().year;
-    //TODO(Should be unlimited)
-    for (int i = currentYear; i >= currentYear - 20; i--) {
-      yearList.add(i);
-    }
+    setYearsList();
 
     selectedTime = TimeOfDay(
         hour: widget.initialDate.hour, minute: widget.initialDate.minute);
@@ -66,6 +63,16 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
       provider.currentYear = yearList.first;
     });
     super.initState();
+  }
+
+  void setYearsList() {
+    yearList.clear();
+    int currentYear = DateTime.now().year;
+
+    //TODO(Should be unlimited)
+    for (int i = currentYear; i >= currentYear - 20; i--) {
+      yearList.add(i);
+    }
   }
 
   @override

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../all_providers.dart';
+import '../core/calendar_mode.dart';
 import '../provider/date_provider.dart';
 import '../styles.dart';
 import 'calendar_header.dart';
@@ -36,7 +37,7 @@ class UIPart extends ConsumerStatefulWidget {
   final BaseDateTime firstDay;
   final int indexToSkip;
   final bool isRangeSelection;
-  final String calMode;
+  final CalendarMode calMode;
 
   @override
   ConsumerState<UIPart> createState() => _UIPartState();
