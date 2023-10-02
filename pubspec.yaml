@@ -37,7 +37,7 @@ dependencies:
 #  We do not need localization package for localization!
 #  localization: ^2.1.0
   flutter_localization:
-    sdk: flutter
+#    sdk: flutter
 #   Install Flutter Intl plugin
 #   Go to Tools | Flutter Intl | Initialize for the Project.
 #   on main.dart: import 'package:flutter_localizations/flutter_localizations.dart';
