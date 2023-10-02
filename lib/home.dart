@@ -61,8 +61,6 @@ class MyHomePage extends ConsumerWidget {
                   width: 150,
                   child: DropDownWidget<CalendarMode>(
                     items: CalendarMode.values,
-                    // hintText: provider.currentYear.toString(),
-                    // hintStyle: Styles.s16w7p,
                     valueStyle: Styles.s14w4b,
                     onChanged: (CalendarMode? newValue) {
                       if (newValue != null) {
