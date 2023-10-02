@@ -76,7 +76,7 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
 
   void setWeekDays() {
     weekDayNames.clear();
-    if (widget.calMode == "p") {
+    if (widget.calMode == CalendarMode.PERSIAN) {
       for (int i = 1; i < 8; i++) {
         weekDayNames.add(PersianDateTime.getWeekdayName(i).substring(0, 1));
       }

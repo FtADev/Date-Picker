@@ -2,7 +2,19 @@ import 'package:custom_date_picker/core/calendar_mode.dart';
 import 'package:flutter/material.dart';
 
 class MainProvider extends ChangeNotifier {
-  CalendarMode _calMode = CalendarMode.PERSIAN;
+  Locale _locale = const Locale.fromSubtags(languageCode: 'en');
+
+  Locale get locale => _locale;
+
+  set locale(Locale value) {
+    if (value != _locale) {
+      _locale = value;
+      debugPrint("Locale change to $_locale");
+      notifyListeners();
+    }
+  }
+
+  CalendarMode _calMode = CalendarMode.GREGORIAN;
 
   CalendarMode get calMode => _calMode;
 
@@ -49,5 +61,4 @@ class MainProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-
 }

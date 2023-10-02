@@ -8,6 +8,7 @@ import '../../widgets/drop_down_widget.dart';
 import '../app_colors.dart';
 import '../core/calendar_mode.dart';
 import '../functions.dart';
+import '../generated/l10n.dart';
 import '../provider/date_provider.dart';
 import '../styles.dart';
 import '../widgets/month_view.dart';
@@ -99,7 +100,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                 children: [
                   Row(
                     children: [
-                      const Text("Date:", style: Styles.s18w7b),
+                      Text(S.of(context).date, style: Styles.s18w7b),
                       const Spacer(),
                       widget.showYear
                           ? SizedBox(
@@ -142,7 +143,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              const Text("Time:", style: Styles.s18w7b),
+                              Text(S.of(context).time, style: Styles.s18w7b),
                               const SizedBox(
                                 height: 5,
                               ),
@@ -153,7 +154,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                     height: 30,
                   ),
                   RoundedButton(
-                    title: "Submit",
+                    title: S.of(context).submit,
                     onTap: () {
                       if (widget.showRange) {
                         if (provider.selectedDay1 == null) {
@@ -195,7 +196,10 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                 margin: const EdgeInsets.only(bottom: 5),
                 child: Row(
                   children: [
-                    const Text("From: ", style: Styles.s16w7b),
+                    Text(S.of(context).from, style: Styles.s16w7b),
+                    const SizedBox(
+                      width: 5,
+                    ),
                     Text(provider.selectedDay1?.toString() ?? "",
                         style: Styles.s16w7p),
                   ],
@@ -205,7 +209,10 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
         provider.selectedDay2 != null
             ? Row(
                 children: [
-                  const Text("To: ", style: Styles.s16w7b),
+                  Text(S.of(context).to, style: Styles.s16w7b),
+                  const SizedBox(
+                    width: 5,
+                  ),
                   Text(provider.selectedDay2?.toString() ?? "",
                       style: Styles.s16w7p),
                 ],
@@ -255,7 +262,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
         const SizedBox(
           width: 10,
         ),
-        const Text("to", style: Styles.s16w7b),
+        Text(S.of(context).to, style: Styles.s16w7b),
         const SizedBox(
           width: 10,
         ),
