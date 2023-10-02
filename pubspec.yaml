@@ -34,6 +34,25 @@ dependencies:
   intl: ^0.18.0
   shamsi_date: ^1.0.2
 
+#  We do not need localization package for localization!
+#  localization: ^2.1.0
+  flutter_localization:
+    sdk: flutter
+#   Install Flutter Intl plugin
+#   Go to Tools | Flutter Intl | Initialize for the Project.
+#   on main.dart: import 'package:flutter_localizations/flutter_localizations.dart';
+#     MaterialApp(
+#            localizationsDelegates: [
+#                S.delegate,
+#                GlobalMaterialLocalizations.delegate,
+#                GlobalWidgetsLocalizations.delegate,
+#                GlobalCupertinoLocalizations.delegate,
+#            ],
+#            supportedLocales: S.delegate.supportedLocales,)
+#     Go to Tools | Flutter Intl | Add locale
+#     Use: Text(S.of(context).title);
+
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -90,3 +109,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true
