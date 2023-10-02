@@ -1,7 +1,13 @@
 {
+  "title": "Custom Date Picker",
   "date": "Date",
   "submit": "Submit",
   "time": "Time",
   "from": "From",
-  "to": "To"
+  "to": "To",
+  "showTime": "Show Time",
+  "showRange": "Show Range",
+  "showYear": "Show Year",
+  "calMode": "Calendar Mode",
+  "datePicker": "Date Picker"
 }

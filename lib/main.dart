@@ -31,7 +31,7 @@ class MyApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: const MyHomePage(title: 'Custom Date Picker'),
+      home: const MyHomePage(),
     );
   }
 }

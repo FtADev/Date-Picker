@@ -5,12 +5,11 @@ import 'all_providers.dart';
 import 'core/base_datetime.dart';
 import 'core/calendar_mode.dart';
 import 'dialog/date_picker_dialog.dart';
+import 'generated/l10n.dart';
 import 'provider/main_provider.dart';
 
 class MyHomePage extends ConsumerWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   final List<CalendarMode> calendarModeList = CalendarMode.values;
 
@@ -43,7 +42,7 @@ class MyHomePage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(S.of(context).title),
       ),
       body: Center(
         child: Column(
@@ -52,7 +51,7 @@ class MyHomePage extends ConsumerWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("Calendar mode:"),
+                Text(S.of(context).calMode),
                 const SizedBox(
                   width: 10,
                 ),
@@ -73,7 +72,7 @@ class MyHomePage extends ConsumerWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("Show Range"),
+                Text(S.of(context).showRange),
                 Switch(
                   value: provider.showRange,
                   onChanged: (bool value) {
@@ -85,7 +84,7 @@ class MyHomePage extends ConsumerWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("Show Time"),
+                Text(S.of(context).showTime),
                 Switch(
                   value: provider.showTime,
                   onChanged: (bool value) {
@@ -97,7 +96,7 @@ class MyHomePage extends ConsumerWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("Show Year"),
+                Text(S.of(context).showYear),
                 Switch(
                   value: provider.showYear,
                   onChanged: (bool value) {
@@ -111,7 +110,7 @@ class MyHomePage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showRangePicker(context, provider),
-        tooltip: 'Date Picker',
+        tooltip: S.of(context).datePicker,
         child: const Icon(Icons.calendar_month),
       ),
     );
