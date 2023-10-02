@@ -7,6 +7,8 @@ import 'core/calendar_mode.dart';
 import 'dialog/date_picker_dialog.dart';
 import 'generated/l10n.dart';
 import 'provider/main_provider.dart';
+import 'styles.dart';
+import 'widgets/drop_down_widget.dart';
 
 class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key});
@@ -55,18 +57,22 @@ class MyHomePage extends ConsumerWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                DropdownButton<CalendarMode>(
-                    value: provider.calMode,
+                SizedBox(
+                  width: 150,
+                  child: DropDownWidget<CalendarMode>(
+                    items: CalendarMode.values,
+                    // hintText: provider.currentYear.toString(),
+                    // hintStyle: Styles.s16w7p,
+                    valueStyle: Styles.s14w4b,
                     onChanged: (CalendarMode? newValue) {
                       if (newValue != null) {
                         provider.calMode = newValue;
                         changeLocale(provider, newValue);
                       }
                     },
-                    items: CalendarMode.values.map((CalendarMode classType) {
-                      return DropdownMenuItem<CalendarMode>(
-                          value: classType, child: Text(classType.name));
-                    }).toList())
+                    value: provider.calMode,
+                  ),
+                ),
               ],
             ),
             Row(
