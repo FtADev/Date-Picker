@@ -22,10 +22,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "calMode": MessageLookupByLibrary.simpleMessage("Calendar Mode"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
+        "datePicker": MessageLookupByLibrary.simpleMessage("Date Picker"),
         "from": MessageLookupByLibrary.simpleMessage("From"),
+        "showRange": MessageLookupByLibrary.simpleMessage("Show Range"),
+        "showTime": MessageLookupByLibrary.simpleMessage("Show Time"),
+        "showYear": MessageLookupByLibrary.simpleMessage("Show Year"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "time": MessageLookupByLibrary.simpleMessage("Time"),
+        "title": MessageLookupByLibrary.simpleMessage("Custom Date Picker"),
         "to": MessageLookupByLibrary.simpleMessage("To")
       };
 }

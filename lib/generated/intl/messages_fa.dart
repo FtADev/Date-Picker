@@ -22,10 +22,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "calMode": MessageLookupByLibrary.simpleMessage("انتخاب تقویم"),
         "date": MessageLookupByLibrary.simpleMessage("تاریخ"),
+        "datePicker": MessageLookupByLibrary.simpleMessage("نمایش تقویم"),
         "from": MessageLookupByLibrary.simpleMessage("از"),
+        "showRange": MessageLookupByLibrary.simpleMessage("انتخاب بازه‌ای"),
+        "showTime": MessageLookupByLibrary.simpleMessage("نشان دادن ساعت"),
+        "showYear": MessageLookupByLibrary.simpleMessage("نشان دادن سال"),
         "submit": MessageLookupByLibrary.simpleMessage("تایید"),
         "time": MessageLookupByLibrary.simpleMessage("ساعت"),
+        "title": MessageLookupByLibrary.simpleMessage("تقویم شخصی سازی شده!"),
         "to": MessageLookupByLibrary.simpleMessage("تا")
       };
 }

@@ -1,4 +1,7 @@
 enum CalendarMode {
   GREGORIAN,
-  PERSIAN,
+  PERSIAN;
+
+  @override
+  String toString() => name;
 }

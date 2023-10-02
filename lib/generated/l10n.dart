@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Custom Date Picker`
+  String get title {
+    return Intl.message(
+      'Custom Date Picker',
+      name: 'title',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Date`
   String get date {
     return Intl.message(
@@ -95,6 +105,56 @@ class S {
     return Intl.message(
       'To',
       name: 'to',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show Time`
+  String get showTime {
+    return Intl.message(
+      'Show Time',
+      name: 'showTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show Range`
+  String get showRange {
+    return Intl.message(
+      'Show Range',
+      name: 'showRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show Year`
+  String get showYear {
+    return Intl.message(
+      'Show Year',
+      name: 'showYear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Calendar Mode`
+  String get calMode {
+    return Intl.message(
+      'Calendar Mode',
+      name: 'calMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date Picker`
+  String get datePicker {
+    return Intl.message(
+      'Date Picker',
+      name: 'datePicker',
       desc: '',
       args: [],
     );
