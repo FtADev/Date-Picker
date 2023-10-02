@@ -8,6 +8,7 @@ import '../../widgets/drop_down_widget.dart';
 import '../app_colors.dart';
 import '../core/calendar_mode.dart';
 import '../functions.dart';
+import '../generated/l10n.dart';
 import '../provider/date_provider.dart';
 import '../styles.dart';
 import '../widgets/month_view.dart';
@@ -99,7 +100,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                 children: [
                   Row(
                     children: [
-                      const Text("Date:", style: Styles.s18w7b),
+                      Text(S.of(context).date, style: Styles.s18w7b),
                       const Spacer(),
                       widget.showYear
                           ? SizedBox(

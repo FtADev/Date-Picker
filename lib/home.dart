@@ -1,54 +1,20 @@
-import 'package:custom_date_picker/provider/main_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'all_providers.dart';
-import 'generated/l10n.dart';
-// import 'home.dart';
+import 'core/base_datetime.dart';
+import 'core/calendar_mode.dart';
+import 'dialog/date_picker_dialog.dart';
+import 'provider/main_provider.dart';
 
-void main() {
-  runApp(const ProviderScope(child: MyApp()));
-}
-
-class MyApp extends ConsumerWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context, ref) {
-    MainProvider provider = ref.watch(AllProvider.mainProvider);
-
-    return MaterialApp(
-      title: 'Custom Date Picker',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      // locale: provider.locale,
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      home: const MyHomePage(title: 'Custom Date Picker'),
-    );
-  }
-}
-
-class MyHomePage extends ConsumerStatefulWidget {
+class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key, required this.title});
 
   final String title;
 
-  @override
-  ConsumerState<MyHomePage> createState() => _MyHomePageState();
-}
+  final List<CalendarMode> calendarModeList = CalendarMode.values;
 
-class _MyHomePageState extends ConsumerState<MyHomePage> {
-  List<CalendarMode> calendarModeList = CalendarMode.values;
-
-  void _showRangePicker(MainProvider provider) {
+  void _showRangePicker(BuildContext context, MainProvider provider) {
     showDialog(
         context: context,
         builder: (_) => MyDatePickerDialog(
@@ -63,13 +29,21 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             ));
   }
 
+  changeLocale(MainProvider provider, CalendarMode mode) {
+    if (mode == CalendarMode.PERSIAN) {
+      provider.locale = const Locale.fromSubtags(languageCode: 'fa');
+    } else {
+      provider.locale = const Locale.fromSubtags(languageCode: 'en');
+    }
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     MainProvider provider = ref.watch(AllProvider.mainProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: Center(
         child: Column(
@@ -87,6 +61,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                     onChanged: (CalendarMode? newValue) {
                       if (newValue != null) {
                         provider.calMode = newValue;
+                        changeLocale(provider, newValue);
                       }
                     },
                     items: CalendarMode.values.map((CalendarMode classType) {
@@ -135,36 +110,10 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _showRangePicker(provider),
+        onPressed: () => _showRangePicker(context, provider),
         tooltip: 'Date Picker',
         child: const Icon(Icons.calendar_month),
       ),
-    );
-  }
-}
-
-class SwitchExample extends StatefulWidget {
-  const SwitchExample({super.key});
-
-  @override
-  State<SwitchExample> createState() => _SwitchExampleState();
-}
-
-class _SwitchExampleState extends State<SwitchExample> {
-  bool light = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return Switch(
-      // This bool value toggles the switch.
-      value: light,
-      activeColor: Colors.red,
-      onChanged: (bool value) {
-        // This is called when the user toggles the switch.
-        setState(() {
-          light = value;
-        });
-      },
     );
   }
 }
