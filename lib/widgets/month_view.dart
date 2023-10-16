@@ -14,8 +14,12 @@ class MonthView extends ConsumerStatefulWidget {
   final List<DateTime>? disableDates;
   final bool isRangeSelection;
   final CalendarMode calMode;
+  final Color? primaryColor;
+  final Color? secondaryColor;
 
   const MonthView({
+    this.primaryColor,
+    this.secondaryColor,
     required this.calMode,
     required this.isRangeSelection,
     super.key,
@@ -71,6 +75,8 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
       weekdays: weekDayNames,
       disableDates: widget.disableDates,
       isRangeSelection: widget.isRangeSelection,
+      primaryColor: widget.primaryColor,
+      secondaryColor: widget.secondaryColor,
     );
   }
 

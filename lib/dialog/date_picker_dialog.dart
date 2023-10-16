@@ -10,6 +10,7 @@ import '../core/calendar_mode.dart';
 import '../functions.dart';
 import '../generated/l10n.dart';
 import '../provider/date_provider.dart';
+import '../provider/main_provider.dart';
 import '../styles.dart';
 import '../widgets/month_view.dart';
 import '../widgets/rounded_button.dart';
@@ -79,6 +80,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
   @override
   Widget build(BuildContext context) {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
+    MainProvider mainProvider = ref.watch(AllProvider.mainProvider);
 
     return SimpleDialog(
       shape: RoundedRectangleBorder(
@@ -132,6 +134,8 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                     calMode: widget.calMode,
                     disableDates: widget.disableDates,
                     isRangeSelection: widget.showRange,
+                    primaryColor: mainProvider.color,
+                    secondaryColor: mainProvider.color.withOpacity(0.2),
                   ),
                   widget.showTime
                       ? Column(
@@ -155,6 +159,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                   ),
                   RoundedButton(
                     title: S.of(context).submit,
+                    color: mainProvider.color,
                     onTap: () {
                       if (widget.showRange) {
                         if (provider.selectedDay1 == null) {

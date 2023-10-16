@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../app_colors.dart';
 import '../../styles.dart';
 
 enum HeadPosition { start, end }
@@ -11,6 +10,8 @@ class RangeHeadCell extends StatelessWidget {
   final double cellHeight;
   final HeadPosition headPosition;
   final bool showTail;
+  final Color? primaryColor;
+  final Color? secondaryColor;
 
   const RangeHeadCell({
     Key? key,
@@ -19,6 +20,8 @@ class RangeHeadCell extends StatelessWidget {
     required this.cellHeight,
     required this.headPosition,
     required this.showTail,
+    this.primaryColor,
+    this.secondaryColor,
   }) : super(key: key);
 
   @override
@@ -29,18 +32,20 @@ class RangeHeadCell extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          showTail ? Align(
-            alignment: headPosition == HeadPosition.start
-                ? AlignmentDirectional.centerEnd
-                : AlignmentDirectional.centerStart,
-            child: Container(
-              height: cellHeight - 12,
-              width: cellWidth / 2,
-              color: AppColor.lightPinkColor,
-            ),
-          ) : Container(),
+          showTail
+              ? Align(
+                  alignment: headPosition == HeadPosition.start
+                      ? AlignmentDirectional.centerEnd
+                      : AlignmentDirectional.centerStart,
+                  child: Container(
+                    height: cellHeight - 12,
+                    width: cellWidth / 2,
+                    color: secondaryColor ?? Colors.blue[200],
+                  ),
+                )
+              : Container(),
           CircleAvatar(
-            backgroundColor: AppColor.pinkColor,
+            backgroundColor: primaryColor ?? Colors.blue,
             child: Center(
               child: Text(
                 text,

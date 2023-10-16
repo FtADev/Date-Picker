@@ -20,7 +20,9 @@ import 'weekday_widget.dart';
 
 class UIPart extends ConsumerStatefulWidget {
   const UIPart(
-      {required this.isRangeSelection,
+      {this.primaryColor,
+      this.secondaryColor,
+      required this.isRangeSelection,
       required this.rowsNumber,
       required this.monthName,
       required this.weekdays,
@@ -38,6 +40,8 @@ class UIPart extends ConsumerStatefulWidget {
   final int indexToSkip;
   final bool isRangeSelection;
   final CalendarMode calMode;
+  final Color? primaryColor;
+  final Color? secondaryColor;
 
   @override
   ConsumerState<UIPart> createState() => _UIPartState();
@@ -104,14 +108,16 @@ class _UIPartState extends ConsumerState<UIPart> {
                             ? generateRangeCell(
                                 currentDay: currentDay,
                                 firstDay: widget.firstDay,
-                                isNotPreviousMonth: ((rowIndex * 7) + colIndex) >=
-                                    widget.indexToSkip,
+                                isNotPreviousMonth:
+                                    ((rowIndex * 7) + colIndex) >=
+                                        widget.indexToSkip,
                               )
                             : generateSingleCell(
                                 currentDay: currentDay,
                                 firstDay: widget.firstDay,
-                                isNotPreviousMonth: ((rowIndex * 7) + colIndex) >=
-                                    widget.indexToSkip,
+                                isNotPreviousMonth:
+                                    ((rowIndex * 7) + colIndex) >=
+                                        widget.indexToSkip,
                               );
                       }
                     },
@@ -142,12 +148,14 @@ class _UIPartState extends ConsumerState<UIPart> {
               cellWidth: cellWidth,
               cellHeight: cellHeight,
               text: currentDay.getDay(),
+              color: widget.primaryColor,
             )
           : currentDay.isToday()
               ? BorderedCell(
                   cellWidth: cellWidth,
                   cellHeight: cellHeight,
                   text: currentDay.getDay(),
+                  color: widget.primaryColor,
                 )
               : NormalCell(
                   cellWidth: cellWidth,
@@ -202,6 +210,7 @@ class _UIPartState extends ConsumerState<UIPart> {
             text: currentDay.getDay(),
             cellWidth: cellWidth,
             cellHeight: cellHeight,
+            color: widget.primaryColor,
           );
         } else {
           // normal
@@ -240,6 +249,8 @@ class _UIPartState extends ConsumerState<UIPart> {
         text: currentDay.getDay(),
         cellWidth: cellWidth,
         cellHeight: cellHeight,
+        primaryColor: widget.primaryColor,
+        secondaryColor: widget.secondaryColor,
         headPosition: HeadPosition.start,
         showTail:
             provider.selectedDay1 != null && provider.selectedDay2 != null,
@@ -250,6 +261,8 @@ class _UIPartState extends ConsumerState<UIPart> {
         text: currentDay.getDay(),
         cellWidth: cellWidth,
         cellHeight: cellHeight,
+        primaryColor: widget.primaryColor,
+        secondaryColor: widget.secondaryColor,
         headPosition: HeadPosition.end,
         showTail:
             provider.selectedDay1 != null && provider.selectedDay2 != null,
@@ -259,6 +272,7 @@ class _UIPartState extends ConsumerState<UIPart> {
         text: currentDay.getDay(),
         cellWidth: cellWidth,
         cellHeight: cellHeight,
+        color: widget.secondaryColor,
       );
     }
 

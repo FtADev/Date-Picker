@@ -14,6 +14,17 @@ class MainProvider extends ChangeNotifier {
     }
   }
 
+  Color _color = Colors.blue;
+
+  Color get color => _color;
+
+  set color(Color value) {
+    if (value != _color) {
+      _color = value;
+      notifyListeners();
+    }
+  }
+
   CalendarMode _calMode = CalendarMode.GREGORIAN;
 
   CalendarMode get calMode => _calMode;

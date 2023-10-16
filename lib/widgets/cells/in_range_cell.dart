@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../../app_colors.dart';
 import '../../styles.dart';
 
 class InRangeCell extends StatelessWidget {
   final String text;
   final double cellWidth;
   final double cellHeight;
+  final Color? color;
 
   const InRangeCell({
     Key? key,
     required this.text,
     required this.cellWidth,
     required this.cellHeight,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -22,8 +23,8 @@ class InRangeCell extends StatelessWidget {
       height: cellHeight,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 6),
-        decoration: const BoxDecoration(
-          color: AppColor.lightPinkColor,
+        decoration: BoxDecoration(
+          color: color ?? Colors.blue[200],
         ),
         child: Center(
           child: Text(

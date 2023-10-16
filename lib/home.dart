@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'all_providers.dart';
 import 'core/base_datetime.dart';
 import 'core/calendar_mode.dart';
+import 'dialog/color_picker_dialog.dart';
 import 'dialog/date_picker_dialog.dart';
 import 'generated/l10n.dart';
 import 'provider/main_provider.dart';
@@ -107,6 +108,34 @@ class MyHomePage extends ConsumerWidget {
                     provider.showYear = value;
                   },
                 )
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(S.of(context).pickColor),
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () => showDialog(
+                        context: context,
+                        builder: (_) => ColorPickerDialog(
+                              color: provider.color,
+                              onColorSubmit: (color) {
+                                provider.color = color;
+                                Navigator.pop(context);
+                              },
+                            )),
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: provider.color,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             )
           ],
