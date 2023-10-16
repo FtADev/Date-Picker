@@ -1,13 +1,13 @@
-import 'package:custom_date_picker/core/base_datetime.dart';
-import 'package:custom_date_picker/core/calendar_mode.dart';
-import 'package:custom_date_picker/core/gregorian_datetime.dart';
-import 'package:custom_date_picker/core/other_functions.dart';
-import 'package:custom_date_picker/core/persian_datetime.dart';
-import 'package:custom_date_picker/widgets/ui_part.dart';
+import 'package:custom_date_picker/core/logic/base_datetime.dart';
+import 'package:custom_date_picker/core/logic/calendar_mode.dart';
+import 'package:custom_date_picker/core/logic/gregorian_datetime.dart';
+import 'package:custom_date_picker/core/logic/other_functions.dart';
+import 'package:custom_date_picker/core/logic/persian_datetime.dart';
+import 'package:custom_date_picker/core/ui/main_part.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../all_providers.dart';
+import '../../all_providers.dart';
 import '../provider/date_provider.dart';
 
 class MonthView extends ConsumerStatefulWidget {
@@ -65,7 +65,7 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
 
     setWeekDays();
 
-    return UIPart(
+    return MainPart(
       calMode: widget.calMode,
       firstDay: firstDay,
       indexToSkip: indexToSkip,

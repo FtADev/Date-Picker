@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'all_providers.dart';
-import 'core/base_datetime.dart';
-import 'core/calendar_mode.dart';
+import 'core/logic/base_datetime.dart';
+import 'core/logic/calendar_mode.dart';
 import 'dialog/color_picker_dialog.dart';
 import 'dialog/date_picker_dialog.dart';
 import 'generated/l10n.dart';
 import 'provider/main_provider.dart';
-import 'styles.dart';
-import 'widgets/drop_down_widget.dart';
+import 'core/styles.dart';
+import 'core/ui/widget/drop_down_widget.dart';
 
 class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key});

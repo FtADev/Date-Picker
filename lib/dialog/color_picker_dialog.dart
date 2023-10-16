@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-import '../app_colors.dart';
+import '../core/app_colors.dart';
 import '../generated/l10n.dart';
-import '../styles.dart';
-import '../widgets/rounded_button.dart';
+import '../core/styles.dart';
+import '../core/ui/widget/rounded_button.dart';
 
 class ColorPickerDialog extends StatefulWidget {
   final Color color;

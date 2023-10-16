@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app_colors.dart';
 import '../../styles.dart';
 
+
 class DisableCell extends StatelessWidget {
   final String text;
   final double cellWidth;

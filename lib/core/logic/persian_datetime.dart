@@ -1,5 +1,5 @@
-import 'package:custom_date_picker/core/base_datetime.dart';
-import 'package:custom_date_picker/core/other_functions.dart';
+import 'package:custom_date_picker/core/logic/base_datetime.dart';
+import 'package:custom_date_picker/core/logic/other_functions.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
 class PersianDateTime extends BaseDateTime {

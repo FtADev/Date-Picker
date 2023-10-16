@@ -1,19 +1,19 @@
-import 'package:custom_date_picker/core/other_functions.dart';
+import 'package:custom_date_picker/core/logic/other_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../all_providers.dart';
-import '../../widgets/drop_down_widget.dart';
-import '../app_colors.dart';
-import '../core/calendar_mode.dart';
+import '../core/ui/widget/drop_down_widget.dart';
+import '../core/app_colors.dart';
+import '../core/logic/calendar_mode.dart';
 import '../functions.dart';
 import '../generated/l10n.dart';
-import '../provider/date_provider.dart';
+import '../core/provider/date_provider.dart';
 import '../provider/main_provider.dart';
-import '../styles.dart';
-import '../widgets/month_view.dart';
-import '../widgets/rounded_button.dart';
+import '../core/styles.dart';
+import '../core/ui/month_view.dart';
+import '../core/ui/widget/rounded_button.dart';
 
 class MyDatePickerDialog extends ConsumerStatefulWidget {
   final DateTime initialDate;

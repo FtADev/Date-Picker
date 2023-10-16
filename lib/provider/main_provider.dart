@@ -1,4 +1,4 @@
-import 'package:custom_date_picker/core/calendar_mode.dart';
+import 'package:custom_date_picker/core/logic/calendar_mode.dart';
 import 'package:flutter/material.dart';
 
 class MainProvider extends ChangeNotifier {
