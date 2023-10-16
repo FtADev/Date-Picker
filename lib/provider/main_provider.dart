@@ -1,4 +1,4 @@
-import 'package:custom_date_picker/core/calendar_mode.dart';
+import 'package:custom_date_picker/core/logic/calendar_mode.dart';
 import 'package:flutter/material.dart';
 
 class MainProvider extends ChangeNotifier {
@@ -10,6 +10,17 @@ class MainProvider extends ChangeNotifier {
     if (value != _locale) {
       _locale = value;
       debugPrint("Locale change to $_locale");
+      notifyListeners();
+    }
+  }
+
+  Color _color = Colors.blue;
+
+  Color get color => _color;
+
+  set color(Color value) {
+    if (value != _color) {
+      _color = value;
       notifyListeners();
     }
   }

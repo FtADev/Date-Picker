@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../app_colors.dart';
 import '../../styles.dart';
 
 
@@ -8,12 +7,14 @@ class BorderedCell extends StatelessWidget {
   final String text;
   final double cellWidth;
   final double cellHeight;
+  final Color? color;
 
   const BorderedCell({
     Key? key,
     required this.text,
     required this.cellWidth,
     required this.cellHeight,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -25,7 +26,7 @@ class BorderedCell extends StatelessWidget {
         color: Colors.white,
         shape: BoxShape.circle,
         border: Border.all(
-          color: AppColor.pinkColor,
+          color: color ?? Colors.blue,
         ),
       ),
       child: Center(

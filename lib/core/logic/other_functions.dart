@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:custom_date_picker/core/calendar_mode.dart';
+import 'package:custom_date_picker/core/logic/calendar_mode.dart';
 
 import 'base_datetime.dart';
 import 'gregorian_datetime.dart';

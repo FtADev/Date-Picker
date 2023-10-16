@@ -1,14 +1,14 @@
-import 'package:custom_date_picker/core/base_datetime.dart';
-import 'package:custom_date_picker/core/extensions.dart';
-import 'package:custom_date_picker/core/other_functions.dart';
+import 'package:custom_date_picker/core/logic/base_datetime.dart';
+import 'package:custom_date_picker/core/logic/extensions.dart';
+import 'package:custom_date_picker/core/logic/other_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../all_providers.dart';
-import '../core/calendar_mode.dart';
+import '../../all_providers.dart';
+import '../logic/calendar_mode.dart';
 import '../provider/date_provider.dart';
 import '../styles.dart';
-import 'calendar_header.dart';
+import 'widget/calendar_header.dart';
 import 'cells/bordered_cell.dart';
 import 'cells/disable_cell.dart';
 import 'cells/filled_cell.dart';
@@ -16,11 +16,13 @@ import 'cells/in_range_cell.dart';
 import 'cells/normal_cell.dart';
 import 'cells/other_month_cell.dart';
 import 'cells/range_head_cell.dart';
-import 'weekday_widget.dart';
+import 'widget/weekday_widget.dart';
 
-class UIPart extends ConsumerStatefulWidget {
-  const UIPart(
-      {required this.isRangeSelection,
+class MainPart extends ConsumerStatefulWidget {
+  const MainPart(
+      {this.primaryColor,
+      this.secondaryColor,
+      required this.isRangeSelection,
       required this.rowsNumber,
       required this.monthName,
       required this.weekdays,
@@ -38,12 +40,14 @@ class UIPart extends ConsumerStatefulWidget {
   final int indexToSkip;
   final bool isRangeSelection;
   final CalendarMode calMode;
+  final Color? primaryColor;
+  final Color? secondaryColor;
 
   @override
-  ConsumerState<UIPart> createState() => _UIPartState();
+  ConsumerState<MainPart> createState() => _UIPartState();
 }
 
-class _UIPartState extends ConsumerState<UIPart> {
+class _UIPartState extends ConsumerState<MainPart> {
   double cellWidth = 32;
   double cellHeight = 40;
 
@@ -104,14 +108,16 @@ class _UIPartState extends ConsumerState<UIPart> {
                             ? generateRangeCell(
                                 currentDay: currentDay,
                                 firstDay: widget.firstDay,
-                                isNotPreviousMonth: ((rowIndex * 7) + colIndex) >=
-                                    widget.indexToSkip,
+                                isNotPreviousMonth:
+                                    ((rowIndex * 7) + colIndex) >=
+                                        widget.indexToSkip,
                               )
                             : generateSingleCell(
                                 currentDay: currentDay,
                                 firstDay: widget.firstDay,
-                                isNotPreviousMonth: ((rowIndex * 7) + colIndex) >=
-                                    widget.indexToSkip,
+                                isNotPreviousMonth:
+                                    ((rowIndex * 7) + colIndex) >=
+                                        widget.indexToSkip,
                               );
                       }
                     },
@@ -142,12 +148,14 @@ class _UIPartState extends ConsumerState<UIPart> {
               cellWidth: cellWidth,
               cellHeight: cellHeight,
               text: currentDay.getDay(),
+              color: widget.primaryColor,
             )
           : currentDay.isToday()
               ? BorderedCell(
                   cellWidth: cellWidth,
                   cellHeight: cellHeight,
                   text: currentDay.getDay(),
+                  color: widget.primaryColor,
                 )
               : NormalCell(
                   cellWidth: cellWidth,
@@ -202,6 +210,7 @@ class _UIPartState extends ConsumerState<UIPart> {
             text: currentDay.getDay(),
             cellWidth: cellWidth,
             cellHeight: cellHeight,
+            color: widget.primaryColor,
           );
         } else {
           // normal
@@ -240,6 +249,8 @@ class _UIPartState extends ConsumerState<UIPart> {
         text: currentDay.getDay(),
         cellWidth: cellWidth,
         cellHeight: cellHeight,
+        primaryColor: widget.primaryColor,
+        secondaryColor: widget.secondaryColor,
         headPosition: HeadPosition.start,
         showTail:
             provider.selectedDay1 != null && provider.selectedDay2 != null,
@@ -250,6 +261,8 @@ class _UIPartState extends ConsumerState<UIPart> {
         text: currentDay.getDay(),
         cellWidth: cellWidth,
         cellHeight: cellHeight,
+        primaryColor: widget.primaryColor,
+        secondaryColor: widget.secondaryColor,
         headPosition: HeadPosition.end,
         showTail:
             provider.selectedDay1 != null && provider.selectedDay2 != null,
@@ -259,6 +272,7 @@ class _UIPartState extends ConsumerState<UIPart> {
         text: currentDay.getDay(),
         cellWidth: cellWidth,
         cellHeight: cellHeight,
+        color: widget.secondaryColor,
       );
     }
 

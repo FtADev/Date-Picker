@@ -9,5 +9,6 @@
   "showRange": "Show Range",
   "showYear": "Show Year",
   "calMode": "Calendar Mode",
-  "datePicker": "Date Picker"
+  "datePicker": "Date Picker",
+  "pickColor": "Pick Color"
 }

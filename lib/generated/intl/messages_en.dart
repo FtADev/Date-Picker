@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "datePicker": MessageLookupByLibrary.simpleMessage("Date Picker"),
         "from": MessageLookupByLibrary.simpleMessage("From"),
+        "pickColor": MessageLookupByLibrary.simpleMessage("Pick Color"),
         "showRange": MessageLookupByLibrary.simpleMessage("Show Range"),
         "showTime": MessageLookupByLibrary.simpleMessage("Show Time"),
         "showYear": MessageLookupByLibrary.simpleMessage("Show Year"),

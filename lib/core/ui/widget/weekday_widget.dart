@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../styles.dart';
+import '../../styles.dart';
 
 class WeekdayWidget extends StatelessWidget {
   const WeekdayWidget(

@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "date": MessageLookupByLibrary.simpleMessage("تاریخ"),
         "datePicker": MessageLookupByLibrary.simpleMessage("نمایش تقویم"),
         "from": MessageLookupByLibrary.simpleMessage("از"),
+        "pickColor": MessageLookupByLibrary.simpleMessage("انتخاب رنگ"),
         "showRange": MessageLookupByLibrary.simpleMessage("انتخاب بازه‌ای"),
         "showTime": MessageLookupByLibrary.simpleMessage("نشان دادن ساعت"),
         "showYear": MessageLookupByLibrary.simpleMessage("نشان دادن سال"),

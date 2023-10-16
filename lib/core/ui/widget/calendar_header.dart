@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../all_providers.dart';
-import '../provider/date_provider.dart';
+import '../../../all_providers.dart';
+import '../../provider/date_provider.dart';
 
 class CalendarHeader extends ConsumerWidget {
   const CalendarHeader({
