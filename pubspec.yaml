@@ -34,6 +34,8 @@ dependencies:
   intl: ^0.18.0
   shamsi_date: ^1.0.2
 
+# Example
+  flutter_colorpicker: ^1.0.3
 #  We do not need localization package for localization!
 #  localization: ^2.1.0
   flutter_localization:
