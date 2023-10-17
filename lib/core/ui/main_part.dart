@@ -8,7 +8,6 @@ import '../../all_providers.dart';
 import '../logic/calendar_mode.dart';
 import '../provider/date_provider.dart';
 import '../styles.dart';
-import 'widget/calendar_header.dart';
 import 'cells/bordered_cell.dart';
 import 'cells/disable_cell.dart';
 import 'cells/filled_cell.dart';
@@ -16,6 +15,7 @@ import 'cells/in_range_cell.dart';
 import 'cells/normal_cell.dart';
 import 'cells/other_month_cell.dart';
 import 'cells/range_head_cell.dart';
+import 'widget/calendar_header.dart';
 import 'widget/weekday_widget.dart';
 
 class MainPart extends ConsumerStatefulWidget {
@@ -59,13 +59,16 @@ class _UIPartState extends ConsumerState<MainPart> {
         CalendarHeader(
           monthName: widget.monthName,
           monthStyle: Styles.s16w7b,
-          leftArrow: const Icon(
+          color: widget.primaryColor,
+          leftArrow: Icon(
             Icons.chevron_left,
             size: 16,
+            color: widget.primaryColor,
           ),
-          rightArrow: const Icon(
+          rightArrow: Icon(
             Icons.chevron_right,
             size: 16,
+            color: widget.primaryColor,
           ),
         ),
         const SizedBox(
