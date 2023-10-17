@@ -1,4 +1,5 @@
 import 'package:custom_date_picker/core/logic/other_functions.dart';
+import 'package:custom_date_picker/provider/dialog_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -9,7 +10,6 @@ import '../core/logic/calendar_mode.dart';
 import '../core/provider/date_provider.dart';
 import '../core/styles.dart';
 import '../core/ui/month_view.dart';
-import '../core/ui/widget/drop_down_widget.dart';
 import '../core/ui/widget/rounded_button.dart';
 import '../functions.dart';
 import '../generated/l10n.dart';
@@ -20,7 +20,7 @@ class MyDatePickerDialog extends ConsumerStatefulWidget {
   final List<DateTime>? disableDates;
   final onSubmitTap;
   final bool showTime;
-  final bool showYear;
+  // final bool showYear;
   final bool showRange;
   final CalendarMode calMode;
 
@@ -30,7 +30,7 @@ class MyDatePickerDialog extends ConsumerStatefulWidget {
     Key? key,
     required this.onSubmitTap,
     this.showTime = true,
-    this.showYear = false,
+    // this.showYear = false,
     this.showRange = false,
     this.calMode = CalendarMode.GREGORIAN, //default mode
   }) : super(key: key);
@@ -43,43 +43,33 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
   late TimeOfDay selectedTime;
   late TimeOfDay selectedTime1;
   late TimeOfDay selectedTime2;
-  List<int> yearList = [];
 
   @override
   void initState() {
-    setYearsList();
-
     selectedTime = TimeOfDay(
         hour: widget.initialDate.hour, minute: widget.initialDate.minute);
     selectedTime1 = TimeOfDay(
         hour: widget.initialDate.hour, minute: widget.initialDate.minute);
     selectedTime2 = TimeOfDay(
         hour: widget.initialDate.hour, minute: widget.initialDate.minute);
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      DateProvider provider = ref.watch(AllProvider.dateProvider);
+      DialogProvider provider = ref.watch(AllProvider.dialogProvider);
+
       provider.calMode = widget.calMode;
       provider.currentDay =
           OtherFunctions.convertToBaseDate(widget.calMode, widget.initialDate);
       provider.showDay =
           OtherFunctions.convertToBaseDate(widget.calMode, widget.initialDate);
-      provider.currentYear = yearList.first;
     });
     super.initState();
   }
 
-  void setYearsList() {
-    yearList.clear();
-    int currentYear = DateTime.now().year;
 
-    //TODO(Should be unlimited)
-    for (int i = currentYear; i >= currentYear - 20; i--) {
-      yearList.add(i);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    DateProvider provider = ref.watch(AllProvider.dateProvider);
+    DialogProvider provider = ref.watch(AllProvider.dialogProvider);
     MainProvider mainProvider = ref.watch(AllProvider.mainProvider);
 
     return SimpleDialog(
@@ -103,25 +93,6 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                   Row(
                     children: [
                       Text(S.of(context).date, style: Styles.s18w7b),
-                      const Spacer(),
-                      widget.showYear
-                          ? SizedBox(
-                              width: 100,
-                              child: DropDownWidget<int>(
-                                items: yearList,
-                                hintText: provider.currentYear.toString(),
-                                hintStyle: Styles.s16w7p,
-                                valueStyle: Styles.s16w7p
-                                    .copyWith(color: mainProvider.color),
-                                onChanged: (int? year) {
-                                  if (year != null) {
-                                    provider.currentYear = year;
-                                  }
-                                },
-                                value: provider.currentYear,
-                              ),
-                            )
-                          : Container(),
                     ],
                   ),
                   const SizedBox(
@@ -192,7 +163,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
   }
 
   Widget rangeDate() {
-    DateProvider provider = ref.watch(AllProvider.dateProvider);
+    DialogProvider provider = ref.watch(AllProvider.dialogProvider);
     MainProvider mainProvider = ref.watch(AllProvider.mainProvider);
 
     return Column(
@@ -231,7 +202,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
   }
 
   Widget normalDate() {
-    DateProvider provider = ref.watch(AllProvider.dateProvider);
+    DialogProvider provider = ref.watch(AllProvider.dialogProvider);
     MainProvider mainProvider = ref.watch(AllProvider.mainProvider);
 
     return Text(provider.currentDay.toString(),
@@ -239,7 +210,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
   }
 
   Widget rangeTime() {
-    DateProvider provider = ref.watch(AllProvider.dateProvider);
+    DialogProvider provider = ref.watch(AllProvider.dialogProvider);
     MainProvider mainProvider = ref.watch(AllProvider.mainProvider);
 
     return Row(

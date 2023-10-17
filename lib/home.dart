@@ -23,7 +23,7 @@ class MyHomePage extends ConsumerWidget {
               initialDate: BaseDateTime.now(),
               showRange: provider.showRange,
               showTime: provider.showTime,
-              showYear: provider.showYear,
+              // showYear: provider.showYear,
               calMode: provider.calMode,
               onSubmitTap: (_) {
                 Navigator.of(context).pop();
@@ -101,19 +101,19 @@ class MyHomePage extends ConsumerWidget {
                 )
               ],
             ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(S.of(context).showYear),
-                Switch(
-                  value: provider.showYear,
-                  activeColor: provider.color,
-                  onChanged: (bool value) {
-                    provider.showYear = value;
-                  },
-                )
-              ],
-            ),
+            // Row(
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: [
+            //     Text(S.of(context).showYear),
+            //     Switch(
+            //       value: provider.showYear,
+            //       activeColor: provider.color,
+            //       onChanged: (bool value) {
+            //         provider.showYear = value;
+            //       },
+            //     )
+            //   ],
+            // ),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
