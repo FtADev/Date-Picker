@@ -42,8 +42,8 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Pick Color",
+                Text(
+                  S.of(context).pickColor,
                   style: Styles.s16w7b,
                 ),
                 MouseRegion(
@@ -63,7 +63,7 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
           ColorPicker(
             pickerColor: color,
             onColorChanged: onColorChanged,
-            colorPickerWidth: 400,
+            colorPickerWidth: 300,
             pickerAreaHeightPercent: 0.7,
             enableAlpha: false,
             displayThumbColor: true,
@@ -76,10 +76,14 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
             // hexInputController: textController,
             portraitOnly: true,
           ),
-          RoundedButton(
-            title: S.of(context).submit,
-            onTap: () => widget.onColorSubmit(color),
-            height: 55,
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: RoundedButton(
+              title: S.of(context).submit,
+              color: color,
+              onTap: () => widget.onColorSubmit(color),
+              height: 55,
+            ),
           ),
           const SizedBox(
             height: 20,

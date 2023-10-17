@@ -4,16 +4,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../all_providers.dart';
-import '../core/ui/widget/drop_down_widget.dart';
 import '../core/app_colors.dart';
 import '../core/logic/calendar_mode.dart';
-import '../functions.dart';
-import '../generated/l10n.dart';
 import '../core/provider/date_provider.dart';
-import '../provider/main_provider.dart';
 import '../core/styles.dart';
 import '../core/ui/month_view.dart';
+import '../core/ui/widget/drop_down_widget.dart';
 import '../core/ui/widget/rounded_button.dart';
+import '../functions.dart';
+import '../generated/l10n.dart';
+import '../provider/main_provider.dart';
 
 class MyDatePickerDialog extends ConsumerStatefulWidget {
   final DateTime initialDate;
@@ -111,7 +111,8 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                                 items: yearList,
                                 hintText: provider.currentYear.toString(),
                                 hintStyle: Styles.s16w7p,
-                                valueStyle: Styles.s16w7p,
+                                valueStyle: Styles.s16w7p
+                                    .copyWith(color: mainProvider.color),
                                 onChanged: (int? year) {
                                   if (year != null) {
                                     provider.currentYear = year;
@@ -192,6 +193,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
 
   Widget rangeDate() {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
+    MainProvider mainProvider = ref.watch(AllProvider.mainProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -206,7 +208,8 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                       width: 5,
                     ),
                     Text(provider.selectedDay1?.toString() ?? "",
-                        style: Styles.s16w7p),
+                        style:
+                            Styles.s16w7p.copyWith(color: mainProvider.color)),
                   ],
                 ),
               )
@@ -219,7 +222,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                     width: 5,
                   ),
                   Text(provider.selectedDay2?.toString() ?? "",
-                      style: Styles.s16w7p),
+                      style: Styles.s16w7p.copyWith(color: mainProvider.color)),
                 ],
               )
             : Container(),
@@ -229,12 +232,15 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
 
   Widget normalDate() {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
+    MainProvider mainProvider = ref.watch(AllProvider.mainProvider);
 
-    return Text(provider.currentDay.toString(), style: Styles.s16w7p);
+    return Text(provider.currentDay.toString(),
+        style: Styles.s16w7p.copyWith(color: mainProvider.color));
   }
 
   Widget rangeTime() {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
+    MainProvider mainProvider = ref.watch(AllProvider.mainProvider);
 
     return Row(
       children: [
@@ -242,10 +248,8 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () async {
-              TimeOfDay? pickedTime = await Functions.onTimeTap(
-                context,
-                selected: selectedTime1,
-              );
+              TimeOfDay? pickedTime = await Functions.onTimeTap(context,
+                  selected: selectedTime1, color: mainProvider.color);
               if (pickedTime != null) {
                 setState(() {
                   selectedTime1 = pickedTime;
@@ -261,7 +265,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                     selectedTime1,
                   ),
                 ),
-                style: Styles.s16w7p),
+                style: Styles.s16w7p.copyWith(color: mainProvider.color)),
           ),
         ),
         const SizedBox(
@@ -278,6 +282,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
               TimeOfDay? pickedTime = await Functions.onTimeTap(
                 context,
                 selected: selectedTime2,
+                color: mainProvider.color,
               );
               if (pickedTime != null) {
                 setState(() {
@@ -294,7 +299,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                     selectedTime2,
                   ),
                 ),
-                style: Styles.s16w7p),
+                style: Styles.s16w7p.copyWith(color: mainProvider.color)),
           ),
         ),
       ],
@@ -303,6 +308,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
 
   Widget normalTime() {
     DateProvider provider = ref.watch(AllProvider.dateProvider);
+    MainProvider mainProvider = ref.watch(AllProvider.mainProvider);
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -311,6 +317,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
           TimeOfDay? pickedTime = await Functions.onTimeTap(
             context,
             selected: selectedTime,
+            color: mainProvider.color,
           );
           if (pickedTime != null) {
             setState(() {
@@ -327,7 +334,7 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                 selectedTime,
               ),
             ),
-            style: Styles.s16w7p),
+            style: Styles.s16w7p.copyWith(color: mainProvider.color)),
       ),
     );
   }
