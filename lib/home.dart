@@ -46,6 +46,7 @@ class MyHomePage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).title),
+        backgroundColor: provider.color,
       ),
       body: Center(
         child: Column(
@@ -80,6 +81,7 @@ class MyHomePage extends ConsumerWidget {
                 Text(S.of(context).showRange),
                 Switch(
                   value: provider.showRange,
+                  activeColor: provider.color,
                   onChanged: (bool value) {
                     provider.showRange = value;
                   },
@@ -92,6 +94,7 @@ class MyHomePage extends ConsumerWidget {
                 Text(S.of(context).showTime),
                 Switch(
                   value: provider.showTime,
+                  activeColor: provider.color,
                   onChanged: (bool value) {
                     provider.showTime = value;
                   },
@@ -104,6 +107,7 @@ class MyHomePage extends ConsumerWidget {
                 Text(S.of(context).showYear),
                 Switch(
                   value: provider.showYear,
+                  activeColor: provider.color,
                   onChanged: (bool value) {
                     provider.showYear = value;
                   },
@@ -114,6 +118,7 @@ class MyHomePage extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(S.of(context).pickColor),
+                const SizedBox(width: 10,),
                 MouseRegion(
                   cursor: SystemMouseCursors.click,
                   child: GestureDetector(
@@ -142,6 +147,7 @@ class MyHomePage extends ConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: provider.color,
         onPressed: () => _showRangePicker(context, provider),
         tooltip: S.of(context).datePicker,
         child: const Icon(Icons.calendar_month),
