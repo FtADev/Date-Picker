@@ -61,20 +61,20 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
   double cellWidth = 32;
   double cellHeight = 40;
 
-  late TimeOfDay selectedTime;
-  late TimeOfDay selectedTime1;
-  late TimeOfDay selectedTime2;
+  // late TimeOfDay selectedTime;
+  // late TimeOfDay selectedTime1;
+  // late TimeOfDay selectedTime2;
 
   @override
   void initState() {
     DateTime? initialDate = widget.initialDate ?? BaseDateTime.now();
 
-    selectedTime =
-        TimeOfDay(hour: initialDate.hour, minute: initialDate.minute);
-    selectedTime1 =
-        TimeOfDay(hour: initialDate.hour, minute: initialDate.minute);
-    selectedTime2 =
-        TimeOfDay(hour: initialDate.hour, minute: initialDate.minute);
+    // selectedTime =
+    //     TimeOfDay(hour: initialDate.hour, minute: initialDate.minute);
+    // selectedTime1 =
+    //     TimeOfDay(hour: initialDate.hour, minute: initialDate.minute);
+    // selectedTime2 =
+    //     TimeOfDay(hour: initialDate.hour, minute: initialDate.minute);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       DateProvider provider = ref.watch(AllProvider.dateProvider);

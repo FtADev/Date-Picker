@@ -88,19 +88,19 @@ class MyHomePage extends ConsumerWidget {
                 )
               ],
             ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(S.of(context).showTime),
-                Switch(
-                  value: provider.showTime,
-                  activeColor: provider.color,
-                  onChanged: (bool value) {
-                    provider.showTime = value;
-                  },
-                )
-              ],
-            ),
+            // Row(
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: [
+            //     Text(S.of(context).showTime),
+            //     Switch(
+            //       value: provider.showTime,
+            //       activeColor: provider.color,
+            //       onChanged: (bool value) {
+            //         provider.showTime = value;
+            //       },
+            //     )
+            //   ],
+            // ),
             // Row(
             //   mainAxisSize: MainAxisSize.min,
             //   children: [
