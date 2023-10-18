@@ -20,7 +20,8 @@ import 'widget/weekday_widget.dart';
 
 class MainPart extends ConsumerStatefulWidget {
   const MainPart(
-      {this.primaryColor,
+      {this.onDaysSelected,
+      this.primaryColor,
       this.secondaryColor,
       required this.isRangeSelection,
       required this.rowsNumber,
@@ -42,6 +43,7 @@ class MainPart extends ConsumerStatefulWidget {
   final CalendarMode calMode;
   final Color? primaryColor;
   final Color? secondaryColor;
+  final Function? onDaysSelected;
 
   @override
   ConsumerState<MainPart> createState() => _UIPartState();
@@ -192,6 +194,10 @@ class _UIPartState extends ConsumerState<MainPart> {
     switchMonth(provider, whichMonth);
 
     provider.currentDay = currentDay;
+
+    if (widget.onDaysSelected != null) {
+      widget.onDaysSelected!([currentDay]);
+    }
   }
 
   Widget generateRangeCell(
@@ -295,6 +301,12 @@ class _UIPartState extends ConsumerState<MainPart> {
       provider.selectedDay2 = currentDay;
     } else {
       provider.selectedDay1 = currentDay;
+    }
+
+    if (provider.selectedDay1 != null && provider.selectedDay2 != null) {
+      if (widget.onDaysSelected != null) {
+        widget.onDaysSelected!([provider.selectedDay1, provider.selectedDay2]);
+      }
     }
   }
 

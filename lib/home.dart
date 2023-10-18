@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'all_providers.dart';
 import 'core/logic/base_datetime.dart';
 import 'core/logic/calendar_mode.dart';
+import 'core/styles.dart';
+import 'core/ui/widget/drop_down_widget.dart';
 import 'dialog/color_picker_dialog.dart';
 import 'dialog/date_picker_dialog.dart';
 import 'generated/l10n.dart';
 import 'provider/main_provider.dart';
-import 'core/styles.dart';
-import 'core/ui/widget/drop_down_widget.dart';
 
 class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key});
@@ -118,7 +118,9 @@ class MyHomePage extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(S.of(context).pickColor),
-                const SizedBox(width: 10,),
+                const SizedBox(
+                  width: 10,
+                ),
                 MouseRegion(
                   cursor: SystemMouseCursors.click,
                   child: GestureDetector(

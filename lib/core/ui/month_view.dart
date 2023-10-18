@@ -11,13 +11,27 @@ import '../../all_providers.dart';
 import '../provider/date_provider.dart';
 
 class MonthView extends ConsumerStatefulWidget {
+  final DateTime? initialDate;
   final List<DateTime>? disableDates;
   final bool isRangeSelection;
   final CalendarMode calMode;
   final Color? primaryColor;
   final Color? secondaryColor;
 
+  final Function? onDaysSelected;
+
+  /// Example:
+  /// onDaysSelected(List<BaseDateTime?> days) {
+  //      selectedDay1 = days[0]; //for both single & range selection
+  //
+  //      if (widget.showRange) {
+  //        selectedDay2 = days[1];
+  //      }
+  //    }
+
   const MonthView({
+    this.onDaysSelected,
+    this.initialDate,
     this.primaryColor,
     this.secondaryColor,
     required this.calMode,
@@ -46,6 +60,33 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
 
   double cellWidth = 32;
   double cellHeight = 40;
+
+  late TimeOfDay selectedTime;
+  late TimeOfDay selectedTime1;
+  late TimeOfDay selectedTime2;
+
+  @override
+  void initState() {
+    DateTime? initialDate = widget.initialDate ?? BaseDateTime.now();
+
+    selectedTime =
+        TimeOfDay(hour: initialDate.hour, minute: initialDate.minute);
+    selectedTime1 =
+        TimeOfDay(hour: initialDate.hour, minute: initialDate.minute);
+    selectedTime2 =
+        TimeOfDay(hour: initialDate.hour, minute: initialDate.minute);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      DateProvider provider = ref.watch(AllProvider.dateProvider);
+
+      provider.calMode = widget.calMode;
+      provider.currentDay =
+          OtherFunctions.convertToBaseDate(widget.calMode, initialDate);
+      provider.showDay =
+          OtherFunctions.convertToBaseDate(widget.calMode, initialDate);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +117,7 @@ class _RangeSelectionMonthView extends ConsumerState<MonthView> {
       isRangeSelection: widget.isRangeSelection,
       primaryColor: widget.primaryColor,
       secondaryColor: widget.secondaryColor,
+      onDaysSelected: widget.onDaysSelected,
     );
   }
 
