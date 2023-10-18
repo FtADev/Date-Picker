@@ -4,17 +4,26 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'all_providers.dart';
 import 'core/logic/base_datetime.dart';
 import 'core/logic/calendar_mode.dart';
+import 'core/styles.dart';
+import 'core/ui/widget/drop_down_widget.dart';
 import 'dialog/color_picker_dialog.dart';
 import 'dialog/date_picker_dialog.dart';
 import 'generated/l10n.dart';
 import 'provider/main_provider.dart';
-import 'core/styles.dart';
-import 'core/ui/widget/drop_down_widget.dart';
 
-class MyHomePage extends ConsumerWidget {
-  const MyHomePage({super.key});
+class MyHomePage extends ConsumerStatefulWidget {
+  MyHomePage({super.key});
 
+  @override
+  ConsumerState<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends ConsumerState<MyHomePage> {
   final List<CalendarMode> calendarModeList = CalendarMode.values;
+
+  final TextEditingController yearFromCtrl = TextEditingController();
+
+  final TextEditingController yearRangeCtrl = TextEditingController();
 
   void _showRangePicker(BuildContext context, MainProvider provider) {
     showDialog(
@@ -23,7 +32,7 @@ class MyHomePage extends ConsumerWidget {
               initialDate: BaseDateTime.now(),
               showRange: provider.showRange,
               showTime: provider.showTime,
-              showYear: provider.showYear,
+              yearRange: [int.parse(yearFromCtrl.text), int.parse(yearRangeCtrl.text)],
               calMode: provider.calMode,
               onSubmitTap: (_) {
                 Navigator.of(context).pop();
@@ -40,7 +49,14 @@ class MyHomePage extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    yearFromCtrl.text = "2010";
+    yearRangeCtrl.text = "20";
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     MainProvider provider = ref.watch(AllProvider.mainProvider);
 
     return Scaffold(
@@ -88,37 +104,46 @@ class MyHomePage extends ConsumerWidget {
                 )
               ],
             ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(S.of(context).showTime),
-                Switch(
-                  value: provider.showTime,
-                  activeColor: provider.color,
-                  onChanged: (bool value) {
-                    provider.showTime = value;
-                  },
-                )
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(S.of(context).showYear),
-                Switch(
-                  value: provider.showYear,
-                  activeColor: provider.color,
-                  onChanged: (bool value) {
-                    provider.showYear = value;
-                  },
-                )
-              ],
-            ),
+            // Row(
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: [
+            //     Text(S.of(context).showTime),
+            //     Switch(
+            //       value: provider.showTime,
+            //       activeColor: provider.color,
+            //       onChanged: (bool value) {
+            //         provider.showTime = value;
+            //       },
+            //     )
+            //   ],
+            // ),
+            // Row(
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: [
+            //     Text(S.of(context).showYear),
+            //     SizedBox(width: 10,),
+            //     Text(S.of(context).from),
+            //     SizedBox(width: 10,),
+            //     Container(
+            //         width: 100,
+            //         child: TextFormField(controller: yearFromCtrl,)),
+            //     SizedBox(width: 10,),
+            //     Text("until"),
+            //     SizedBox(width: 10,),
+            //     Container(
+            //         width: 50,
+            //         child: TextFormField(controller: yearRangeCtrl,)),
+            //     Text("years later"),
+            //   ],
+            // ),
+            SizedBox(height: 10,),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(S.of(context).pickColor),
-                const SizedBox(width: 10,),
+                const SizedBox(
+                  width: 10,
+                ),
                 MouseRegion(
                   cursor: SystemMouseCursors.click,
                   child: GestureDetector(
