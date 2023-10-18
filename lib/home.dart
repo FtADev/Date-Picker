@@ -117,25 +117,25 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             //     )
             //   ],
             // ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(S.of(context).showYear),
-                SizedBox(width: 10,),
-                Text(S.of(context).from),
-                SizedBox(width: 10,),
-                Container(
-                    width: 100,
-                    child: TextFormField(controller: yearFromCtrl,)),
-                SizedBox(width: 10,),
-                Text("until"),
-                SizedBox(width: 10,),
-                Container(
-                    width: 50,
-                    child: TextFormField(controller: yearRangeCtrl,)),
-                Text("years later"),
-              ],
-            ),
+            // Row(
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: [
+            //     Text(S.of(context).showYear),
+            //     SizedBox(width: 10,),
+            //     Text(S.of(context).from),
+            //     SizedBox(width: 10,),
+            //     Container(
+            //         width: 100,
+            //         child: TextFormField(controller: yearFromCtrl,)),
+            //     SizedBox(width: 10,),
+            //     Text("until"),
+            //     SizedBox(width: 10,),
+            //     Container(
+            //         width: 50,
+            //         child: TextFormField(controller: yearRangeCtrl,)),
+            //     Text("years later"),
+            //   ],
+            // ),
             SizedBox(height: 10,),
             Row(
               mainAxisSize: MainAxisSize.min,

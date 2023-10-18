@@ -87,17 +87,16 @@ class _CalendarHeaderState extends ConsumerState<CalendarHeader> {
   void setYearsList() {
     yearList.clear();
     // if (widget.yearRange == null) {
-    //   int currentYear = DateTime.now().year;
-    //
-    //   for (int i = currentYear; i >= currentYear - 20; i--) {
-    //     yearList.add(i);
-    //   }
-    // } else {
-    print(widget.yearRange);
-      for (int i = widget.yearRange[0]; i < widget.yearRange[1]; i++) {
-        print(i);
+      int currentYear = DateTime.now().year;
+
+      for (int i = currentYear; i >= currentYear - 20; i--) {
         yearList.add(i);
       }
+    // } else {
+    //   for (int i = widget.yearRange[0]; i < widget.yearRange[1]; i++) {
+    //     print(i);
+    //     yearList.add(i);
+    //   }
     // }
   }
 }
