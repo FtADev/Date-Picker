@@ -8,6 +8,7 @@ import 'drop_down_widget.dart';
 
 class CalendarHeader extends ConsumerStatefulWidget {
   CalendarHeader({
+    required this.yearRange,
     this.color,
     required this.monthName,
     required this.monthStyle,
@@ -21,6 +22,7 @@ class CalendarHeader extends ConsumerStatefulWidget {
   final Widget leftArrow;
   final Widget rightArrow;
   final Color? color;
+  final List<int> yearRange;
 
   @override
   ConsumerState<CalendarHeader> createState() => _CalendarHeaderState();
@@ -84,11 +86,18 @@ class _CalendarHeaderState extends ConsumerState<CalendarHeader> {
 
   void setYearsList() {
     yearList.clear();
-    int currentYear = DateTime.now().year;
-
-    //TODO(Should be unlimited)
-    for (int i = currentYear; i >= currentYear - 20; i--) {
-      yearList.add(i);
-    }
+    // if (widget.yearRange == null) {
+    //   int currentYear = DateTime.now().year;
+    //
+    //   for (int i = currentYear; i >= currentYear - 20; i--) {
+    //     yearList.add(i);
+    //   }
+    // } else {
+    print(widget.yearRange);
+      for (int i = widget.yearRange[0]; i < widget.yearRange[1]; i++) {
+        print(i);
+        yearList.add(i);
+      }
+    // }
   }
 }

@@ -14,7 +14,7 @@ import '../generated/l10n.dart';
 import '../provider/main_provider.dart';
 
 class MyDatePickerDialog extends ConsumerStatefulWidget {
-  final DateTime initialDate;
+  final DateTime? initialDate;
   final List<DateTime>? disableDates;
   final onSubmitTap;
   final bool showTime;
@@ -22,10 +22,12 @@ class MyDatePickerDialog extends ConsumerStatefulWidget {
   // final bool showYear;
   final bool showRange;
   final CalendarMode calMode;
+  final List<int>? yearRange;
 
   const MyDatePickerDialog({
     this.disableDates,
-    required this.initialDate,
+    this.yearRange,
+    this.initialDate,
     Key? key,
     required this.onSubmitTap,
     this.showTime = true,
@@ -83,10 +85,12 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
                   height: 10,
                 ),
                 MonthView(
+                  initialDate: widget.initialDate,
                   calMode: widget.calMode,
                   disableDates: widget.disableDates,
                   isRangeSelection: widget.showRange,
                   primaryColor: mainProvider.color,
+                  yearRange: widget.yearRange,
                   secondaryColor: mainProvider.color.withOpacity(0.2),
                   onDaysSelected: onDaysSelected,
                 ),
