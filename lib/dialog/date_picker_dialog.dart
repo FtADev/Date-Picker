@@ -59,85 +59,82 @@ class _MyDatePickerDialogState extends ConsumerState<MyDatePickerDialog> {
         borderRadius: BorderRadius.circular(20),
       ),
       children: [
-        Directionality(
-          textDirection: OtherFunctions.getTextDirection(widget.calMode),
-          child: Container(
-            width: 300,
-            decoration: const BoxDecoration(
-              color: AppColor.white,
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 25),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(S.of(context).date, style: Styles.s18w7b),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  widget.showRange ? rangeDate() : normalDate(),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  MonthView(
-                    calMode: widget.calMode,
-                    disableDates: widget.disableDates,
-                    isRangeSelection: widget.showRange,
-                    primaryColor: mainProvider.color,
-                    secondaryColor: mainProvider.color.withOpacity(0.2),
-                    onDaysSelected: onDaysSelected,
-                  ),
-                  widget.showTime
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                              const Divider(
-                                color: AppColor.gray0,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(S.of(context).time, style: Styles.s18w7b),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              // widget.showRange ? rangeTime() : normalTime(),
-                            ])
-                      : Container(),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  RoundedButton(
-                    title: S.of(context).submit,
-                    color: mainProvider.color,
-                    onTap: () {
-                      // if (widget.showRange) {
-                      //   if (provider.selectedDay1 == null) {
-                      //     debugPrint("Please select start date");
-                      //     return;
-                      //   }
-                      //   if (provider.selectedDay2 == null) {
-                      //     debugPrint("Please select end date");
-                      //     return;
-                      //   }
-                      // }
-                      // if (widget.showRange) {
-                      //   debugPrint("First day: ${provider.selectedDay1}");
-                      //   debugPrint("Second day: ${provider.selectedDay2}");
-                      // } else {
-                      //   debugPrint("Selected day: ${provider.currentDay}");
-                      // }
-                      Navigator.of(context).pop();
-                    },
-                    height: 55,
-                  )
-                ],
-              ),
+        Container(
+          width: 300,
+          decoration: const BoxDecoration(
+            color: AppColor.white,
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 25),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(S.of(context).date, style: Styles.s18w7b),
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                widget.showRange ? rangeDate() : normalDate(),
+                const SizedBox(
+                  height: 10,
+                ),
+                MonthView(
+                  calMode: widget.calMode,
+                  disableDates: widget.disableDates,
+                  isRangeSelection: widget.showRange,
+                  primaryColor: mainProvider.color,
+                  secondaryColor: mainProvider.color.withOpacity(0.2),
+                  onDaysSelected: onDaysSelected,
+                ),
+                widget.showTime
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                            const Divider(
+                              color: AppColor.gray0,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(S.of(context).time, style: Styles.s18w7b),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            // widget.showRange ? rangeTime() : normalTime(),
+                          ])
+                    : Container(),
+                const SizedBox(
+                  height: 30,
+                ),
+                RoundedButton(
+                  title: S.of(context).submit,
+                  color: mainProvider.color,
+                  onTap: () {
+                    // if (widget.showRange) {
+                    //   if (provider.selectedDay1 == null) {
+                    //     debugPrint("Please select start date");
+                    //     return;
+                    //   }
+                    //   if (provider.selectedDay2 == null) {
+                    //     debugPrint("Please select end date");
+                    //     return;
+                    //   }
+                    // }
+                    // if (widget.showRange) {
+                    //   debugPrint("First day: ${provider.selectedDay1}");
+                    //   debugPrint("Second day: ${provider.selectedDay2}");
+                    // } else {
+                    //   debugPrint("Selected day: ${provider.currentDay}");
+                    // }
+                    Navigator.of(context).pop();
+                  },
+                  height: 55,
+                )
+              ],
             ),
           ),
         )
